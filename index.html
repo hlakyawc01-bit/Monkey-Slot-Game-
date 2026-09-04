@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Monkey Slot 5×5</title>
+<title>Monkey Slot 5x5</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -16,61 +17,63 @@
 body{
   font-family:Arial,sans-serif;
   background:
-    radial-gradient(circle at top,#573c17,#130b06 70%);
+    radial-gradient(circle at top,#5a3d15,#130b05 70%);
   color:#fff;
   min-height:100vh;
 }
 
 .container{
   width:100%;
-  max-width:650px;
+  max-width:680px;
   margin:auto;
   padding:12px;
 }
 
 .card{
-  background:linear-gradient(#33200e,#1b1007);
-  border:2px solid #b67a19;
+  background:linear-gradient(#33200e,#1a0f06);
+  border:2px solid #b77c1b;
   border-radius:18px;
   padding:14px;
   margin-bottom:12px;
-  box-shadow:0 8px 25px rgba(0,0,0,.4);
+  box-shadow:0 8px 25px rgba(0,0,0,.45);
 }
 
 h1,h2{
   text-align:center;
-  color:#ffd24a;
+  color:#ffd54a;
   margin-bottom:12px;
 }
 
-input,button{
+input,
+select,
+button{
   width:100%;
   padding:13px;
   margin-top:8px;
   border-radius:10px;
   border:none;
+  font-size:16px;
 }
 
-input{
-  background:#fff8e6;
+input,
+select{
+  background:#fff8e5;
   color:#111;
-  font-size:16px;
 }
 
 button{
-  background:linear-gradient(#ffcf39,#b66b00);
+  background:linear-gradient(#ffd13d,#b66b00);
   color:#2d1800;
   font-weight:bold;
-  font-size:16px;
   cursor:pointer;
 }
 
 button:active{
-  transform:scale(.98);
+  transform:scale(.97);
 }
 
 button:disabled{
-  opacity:.6;
+  opacity:.55;
 }
 
 .hidden{
@@ -87,44 +90,53 @@ button:disabled{
   color:#fff;
 }
 
-.danger{
-  background:#b52d2d;
+.red{
+  background:#b62d2d;
   color:#fff;
 }
+
+.gray{
+  background:#555;
+  color:#fff;
+}
+
+/* TOP */
 
 .top{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:8px;
+  gap:7px;
   margin-bottom:10px;
 }
 
 .info{
-  text-align:center;
-  background:#1d1108;
+  background:#1b1007;
   border:1px solid #9d6718;
   border-radius:10px;
   padding:8px;
+  text-align:center;
 }
 
 .info small{
   display:block;
-  color:#d9ba70;
+  color:#d6b96f;
   font-size:11px;
 }
 
 .info strong{
   display:block;
-  color:#ffd24a;
-  font-size:18px;
   margin-top:4px;
+  color:#ffd54a;
+  font-size:18px;
   word-break:break-word;
 }
 
+/* MACHINE */
+
 .machine{
-  background:linear-gradient(145deg,#bd8016,#623707);
-  border:4px solid #f3c440;
-  border-radius:20px;
+  background:linear-gradient(145deg,#c78b1b,#623707);
+  border:4px solid #f5c843;
+  border-radius:22px;
   padding:8px;
 }
 
@@ -132,141 +144,172 @@ button:disabled{
   display:grid;
   grid-template-columns:repeat(5,1fr);
   gap:4px;
-  background:#130a05;
   padding:7px;
+  background:#120a05;
   border-radius:13px;
 }
 
 .cell{
   aspect-ratio:1/1;
-  min-height:45px;
+  min-height:44px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:clamp(26px,8vw,48px);
-  background:linear-gradient(#fff8dc,#d9c281);
-  border:2px solid #875f15;
+  font-size:clamp(25px,8vw,48px);
+  background:linear-gradient(#fff8df,#d9c382);
+  border:2px solid #896216;
   border-radius:8px;
   transition:.2s;
 }
 
+.cell.spin{
+  animation:shake .10s infinite;
+}
+
+@keyframes shake{
+  0%{
+    transform:translateY(-3px);
+  }
+  50%{
+    transform:translateY(3px);
+  }
+  100%{
+    transform:translateY(-3px);
+  }
+}
+
 .cell.win{
-  background:#ffd32e;
-  box-shadow:0 0 12px #fff,0 0 20px #ffbd00;
+  background:#ffd42e;
+  box-shadow:
+    0 0 10px #fff,
+    0 0 22px #ffb900;
   transform:scale(1.05);
 }
 
 .cell.scatter{
-  background:#b9e7ff;
-  box-shadow:0 0 12px #fff;
+  background:#bcecff;
+  box-shadow:0 0 15px #fff;
 }
 
-.cell.spin{
-  animation:move .1s infinite;
-}
-
-@keyframes move{
-  0%{transform:translateY(-3px)}
-  50%{transform:translateY(3px)}
-  100%{transform:translateY(-3px)}
-}
+/* MESSAGE */
 
 .message{
-  margin-top:10px;
   min-height:48px;
+  margin-top:9px;
   padding:12px;
   border-radius:10px;
   background:#211308;
-  color:#ffd44d;
+  color:#ffd54a;
   text-align:center;
   font-weight:bold;
   font-size:17px;
 }
 
-.bet-row{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  margin-top:12px;
+/* BET */
+
+.bet-area{
+  margin-top:10px;
 }
 
-.bet-row button{
-  width:60px;
-  margin:0;
-  font-size:23px;
+.bet-label{
+  color:#e6cb8d;
+  font-size:12px;
+  margin-bottom:4px;
 }
 
-.bet-box{
-  flex:1;
-  text-align:center;
-  padding:12px;
-  border-radius:10px;
+.bet-select{
+  width:100%;
   background:#160c06;
-  border:1px solid #b57b1c;
-  color:#ffd34a;
+  color:#ffd54a;
+  border:1px solid #b77c1b;
   font-weight:bold;
-  font-size:18px;
 }
 
-.spin-btn{
-  margin-top:12px;
+/* BUTTONS */
+
+.spin-button{
+  margin-top:10px;
   padding:17px;
   font-size:23px;
-  border:3px solid #ffe68c;
+  border:3px solid #ffe991;
 }
 
-.player{
-  background:#1c1008;
-  border:1px solid #704513;
-  padding:12px;
-  border-radius:12px;
+.auto-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.auto-row button{
+  margin-top:8px;
+}
+
+/* RULES */
+
+.rules{
   margin-top:10px;
+  padding:12px;
+  background:rgba(0,0,0,.3);
+  border-radius:12px;
+  color:#e5d2a1;
+  font-size:12px;
+  line-height:1.7;
+}
+
+/* PLAYER */
+
+.player{
+  margin-top:10px;
+  padding:12px;
+  background:#1b1007;
+  border:1px solid #704512;
+  border-radius:12px;
 }
 
 .player button{
   margin-top:6px;
 }
 
-.history-item{
-  padding:10px;
-  margin-top:6px;
-  background:#211409;
-  border-radius:8px;
-  border-left:3px solid #d99a20;
-}
+/* HISTORY */
 
-.small{
-  color:#d6bf8a;
-  font-size:12px;
+.history-item{
+  margin-top:7px;
+  padding:10px;
+  background:#211409;
+  border-left:3px solid #d99b22;
+  border-radius:7px;
+  font-size:13px;
   line-height:1.5;
 }
 
-.win-popup{
+/* POPUP */
+
+.popup{
   position:fixed;
   inset:0;
   display:none;
   align-items:center;
   justify-content:center;
-  background:rgba(0,0,0,.75);
-  z-index:1000;
+  background:rgba(0,0,0,.78);
+  z-index:999;
 }
 
-.win-popup.show{
+.popup.show{
   display:flex;
 }
 
-.win-box{
-  width:85%;
-  max-width:420px;
+.popup-box{
+  width:88%;
+  max-width:430px;
   padding:30px 20px;
   text-align:center;
-  border-radius:25px;
-  background:linear-gradient(#573a08,#1c1004);
-  border:4px solid #ffd43b;
-  animation:pop .3s ease;
+  border-radius:24px;
+  background:linear-gradient(#563907,#1c1004);
+  border:4px solid #ffd43d;
+  animation:popup .3s ease;
 }
 
-@keyframes pop{
+@keyframes popup{
   from{
     transform:scale(.5);
     opacity:0;
@@ -277,23 +320,33 @@ button:disabled{
   }
 }
 
-.win-title{
-  font-size:32px;
+.popup-title{
+  font-size:31px;
   font-weight:bold;
-  color:#ffe14a;
+  color:#ffe34d;
 }
 
-.win-amount{
-  font-size:42px;
+.popup-amount{
   margin:15px 0;
+  font-size:38px;
   color:#fff;
 }
 
-.admin-title{
-  color:#ffd24a;
-  text-align:center;
-  margin-bottom:10px;
+.small{
+  color:#cdbb91;
+  font-size:12px;
+  line-height:1.5;
 }
+
+.admin-stat{
+  text-align:center;
+  padding:12px;
+  margin-bottom:10px;
+  background:#1b1007;
+  border-radius:10px;
+  border:1px solid #765015;
+}
+
 </style>
 </head>
 
@@ -301,7 +354,10 @@ button:disabled{
 
 <div class="container">
 
-<!-- ================= LOGIN ================= -->
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
 
 <div id="loginPage">
 
@@ -328,11 +384,11 @@ button:disabled{
       class="blue"
       onclick="showRegister()"
     >
-      CREATE ACCOUNT
+      CREATE PLAYER ACCOUNT
     </button>
 
     <button
-      class="danger"
+      class="red"
       onclick="adminLogin()"
     >
       👑 ADMIN LOGIN
@@ -340,9 +396,9 @@ button:disabled{
 
     <p
       class="small"
-      style="text-align:center;margin-top:12px"
+      style="text-align:center;margin-top:10px"
     >
-      Demo virtual coin game
+      Virtual coin demo game
     </p>
 
   </div>
@@ -350,7 +406,9 @@ button:disabled{
 </div>
 
 
-<!-- ================= REGISTER ================= -->
+<!-- =====================================================
+     REGISTER
+===================================================== -->
 
 <div
   id="registerPage"
@@ -388,7 +446,7 @@ button:disabled{
       class="blue"
       onclick="backLogin()"
     >
-      BACK TO LOGIN
+      BACK
     </button>
 
   </div>
@@ -396,7 +454,9 @@ button:disabled{
 </div>
 
 
-<!-- ================= GAME ================= -->
+<!-- =====================================================
+     GAME
+===================================================== -->
 
 <div
   id="gamePage"
@@ -406,6 +466,7 @@ button:disabled{
   <div class="card">
 
     <h1>🐵 MONKEY SLOT 5×5 🐵</h1>
+
 
     <div class="top">
 
@@ -429,53 +490,120 @@ button:disabled{
         <strong id="freeSpins">0</strong>
       </div>
 
+      <div class="info">
+        <small>NEXT FREE</small>
+        <strong id="nextFree">150</strong>
+      </div>
+
+      <div class="info">
+        <small>BET</small>
+        <strong id="topBet">10</strong>
+      </div>
+
     </div>
 
 
     <div class="machine">
 
       <div
-        class="grid"
         id="grid"
+        class="grid"
       ></div>
 
+
       <div
-        class="message"
         id="message"
+        class="message"
       >
         🎰 Press SPIN
       </div>
 
-      <div class="bet-row">
 
-        <button
-          onclick="changeBet(-10)"
-        >
-          −
-        </button>
+      <!-- BET -->
 
-        <div class="bet-box">
+      <div class="bet-area">
 
-          BET:
-          <span id="bet">10</span>
-
+        <div class="bet-label">
+          SELECT BET
         </div>
 
-        <button
-          onclick="changeBet(10)"
+        <select
+          id="betSelect"
+          class="bet-select"
+          onchange="changeBet()"
         >
-          +
-        </button>
+
+          <option value="10">10</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="150">150</option>
+          <option value="200">200</option>
+          <option value="300">300</option>
+          <option value="500">500</option>
+          <option value="800">800</option>
+          <option value="1000">1,000</option>
+          <option value="2000">2,000</option>
+          <option value="2500">2,500</option>
+          <option value="3000">3,000</option>
+          <option value="4000">4,000</option>
+          <option value="5000">5,000</option>
+          <option value="10000">10,000</option>
+          <option value="20000">20,000</option>
+          <option value="25000">25,000</option>
+          <option value="30000">30,000</option>
+
+        </select>
 
       </div>
 
+
+      <!-- SPIN -->
+
       <button
         id="spinBtn"
-        class="spin-btn"
+        class="spin-button"
         onclick="spin()"
       >
         🎰 SPIN
       </button>
+
+
+      <!-- AUTO -->
+
+      <div class="auto-row">
+
+        <button
+          id="autoBtn"
+          class="green"
+          onclick="toggleAuto()"
+        >
+          🔄 AUTO SPIN
+        </button>
+
+        <button
+          class="gray"
+          onclick="stopAuto()"
+        >
+          ⏹ STOP
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="rules">
+
+      🐵 3 တူ = BET × 1 = 100%<br>
+      🐵 4 တူ = BET × 1.5 = 150%<br>
+      🐵 5 တူ = BET × 2 = 200%<br><br>
+
+      🎉 BIG WIN = BET × 5 နှင့်အထက်<br>
+      🔥 SUPER WIN = BET × 10 နှင့်အထက်<br>
+      ⚡ SPIN WIN = BET × 20 နှင့်အထက်<br><br>
+
+      🎁 FREE SPIN = Player Spin 150 ကြိမ်ပြည့်တိုင်း<br>
+      150 Spins = +5 Free Spins
 
     </div>
 
@@ -488,7 +616,7 @@ button:disabled{
     </button>
 
     <button
-      class="danger"
+      class="red"
       onclick="logout()"
     >
       LOGOUT
@@ -499,7 +627,9 @@ button:disabled{
 </div>
 
 
-<!-- ================= HISTORY ================= -->
+<!-- =====================================================
+     HISTORY
+===================================================== -->
 
 <div
   id="historyPage"
@@ -508,7 +638,7 @@ button:disabled{
 
   <div class="card">
 
-    <h2>📜 MY HISTORY</h2>
+    <h2>📜 GAME HISTORY</h2>
 
     <div id="history"></div>
 
@@ -524,7 +654,9 @@ button:disabled{
 </div>
 
 
-<!-- ================= ADMIN ================= -->
+<!-- =====================================================
+     ADMIN
+===================================================== -->
 
 <div
   id="adminPage"
@@ -535,43 +667,55 @@ button:disabled{
 
     <h1>👑 GAME ADMIN</h1>
 
+    <div
+      id="adminStats"
+      class="admin-stat"
+    ></div>
+
     <div id="adminPlayers"></div>
 
     <button
       class="blue"
+      onclick="loadAdminPlayers()"
+    >
+      🔄 REFRESH
+    </button>
+
+    <button
+      class="red"
       onclick="logout()"
     >
-      LOGOUT ADMIN
+      LOGOUT
     </button>
 
   </div>
 
 </div>
 
-</div>
 
-
-<!-- ================= WIN POPUP ================= -->
+<!-- =====================================================
+     WIN POPUP
+===================================================== -->
 
 <div
   id="winPopup"
-  class="win-popup"
+  class="popup"
 >
 
-  <div class="win-box">
+  <div class="popup-box">
 
     <div
       id="winTitle"
-      class="win-title"
+      class="popup-title"
     >
-      WIN!
+      WIN
     </div>
 
     <div
       id="winAmount"
-      class="win-amount"
+      class="popup-amount"
     >
-      0
+      +0
     </div>
 
     <button onclick="closeWinPopup()">
@@ -585,12 +729,14 @@ button:disabled{
 
 <script>
 
-/* =========================================
+/* =====================================================
    CONFIG
-========================================= */
+===================================================== */
 
 const ADMIN_PHONE = "admin";
 const ADMIN_PASSWORD = "123456";
+
+const SCATTER = "🎁";
 
 const symbols = [
   "🐵",
@@ -602,22 +748,55 @@ const symbols = [
   "🎁"
 ];
 
-const SCATTER = "🎁";
+
+/* =====================================================
+   BET LIST
+===================================================== */
+
+const BETS = [
+  10,
+  50,
+  100,
+  150,
+  200,
+  300,
+  500,
+  800,
+  1000,
+  2000,
+  2500,
+  3000,
+  4000,
+  5000,
+  10000,
+  20000,
+  25000,
+  30000
+];
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
 
 let currentUser = null;
 
 let bet = 10;
 
+let cells = [];
+
 let spinning = false;
+
+let autoSpin = false;
+
+let autoTimer = null;
 
 let freeSpins = 0;
 
-let cells = [];
 
-
-/* =========================================
+/* =====================================================
    DATABASE
-========================================= */
+===================================================== */
 
 function getPlayers(){
 
@@ -640,9 +819,9 @@ function savePlayers(players){
 }
 
 
-/* =========================================
-   PAGE CONTROL
-========================================= */
+/* =====================================================
+   PAGE
+===================================================== */
 
 function hideAll(){
 
@@ -691,24 +870,9 @@ function backLogin(){
 }
 
 
-function logout(){
-
-  currentUser = null;
-
-  freeSpins = 0;
-
-  hideAll();
-
-  document
-    .getElementById("loginPage")
-    .classList.remove("hidden");
-
-}
-
-
-/* =========================================
+/* =====================================================
    REGISTER
-========================================= */
+===================================================== */
 
 function registerPlayer(){
 
@@ -789,18 +953,20 @@ function registerPlayer(){
 
   savePlayers(players);
 
+
   alert(
     "Account created successfully!"
   );
+
 
   backLogin();
 
 }
 
 
-/* =========================================
-   PLAYER LOGIN
-========================================= */
+/* =====================================================
+   LOGIN
+===================================================== */
 
 function login(){
 
@@ -816,7 +982,7 @@ function login(){
       .value;
 
 
-  let players =
+  const players =
     getPlayers();
 
 
@@ -842,7 +1008,7 @@ function login(){
   if(player.blocked){
 
     alert(
-      "Your account is blocked"
+      "This account is blocked"
     );
 
     return;
@@ -854,14 +1020,16 @@ function login(){
 
   freeSpins = 0;
 
+  bet = 10;
+
   startGame();
 
 }
 
 
-/* =========================================
+/* =====================================================
    ADMIN LOGIN
-========================================= */
+===================================================== */
 
 function adminLogin(){
 
@@ -903,9 +1071,9 @@ function adminLogin(){
 }
 
 
-/* =========================================
-   GAME START
-========================================= */
+/* =====================================================
+   START GAME
+===================================================== */
 
 function startGame(){
 
@@ -920,6 +1088,12 @@ function startGame(){
     .getElementById("playerName")
     .innerText =
       currentUser.name;
+
+
+  document
+    .getElementById("betSelect")
+    .value =
+      String(bet);
 
 
   createGrid();
@@ -942,8 +1116,8 @@ function createGrid(){
 
 
   for(
-    let i = 0;
-    i < 25;
+    let i=0;
+    i<25;
     i++
   ){
 
@@ -981,24 +1155,32 @@ function randomSymbol(){
 }
 
 
+/* =====================================================
+   UPDATE GAME
+===================================================== */
+
 function updateGame(){
+
+  document
+    .getElementById("playerName")
+    .innerText =
+      currentUser.name;
+
 
   document
     .getElementById("balance")
     .innerText =
-      currentUser.balance;
+      formatNumber(
+        currentUser.balance
+      );
 
 
   document
     .getElementById("spins")
     .innerText =
-      currentUser.spins;
-
-
-  document
-    .getElementById("bet")
-    .innerText =
-      bet;
+      formatNumber(
+        currentUser.spins
+      );
 
 
   document
@@ -1006,75 +1188,123 @@ function updateGame(){
     .innerText =
       freeSpins;
 
-}
+
+  document
+    .getElementById("topBet")
+    .innerText =
+      formatNumber(bet);
 
 
-/* =========================================
-   BET
-========================================= */
-
-function changeBet(amount){
-
-  if(spinning) return;
+  let remainder =
+    currentUser.spins % 150;
 
 
-  let newBet =
-    bet + amount;
-
-
-  if(newBet < 10){
-
-    newBet = 10;
-
-  }
-
-
-  if(newBet > 30000){
-
-    newBet = 30000;
-
-  }
+  let next =
+    150 - remainder;
 
 
   if(
-    newBet >
-    currentUser.balance
+    next === 0
   ){
+    next = 150;
+  }
 
-    if(currentUser.balance >= 10){
 
-      newBet =
-        currentUser.balance;
+  document
+    .getElementById("nextFree")
+    .innerText =
+      next;
 
-    }
+
+  document
+    .getElementById("betSelect")
+    .value =
+      String(bet);
+
+}
+
+
+/* =====================================================
+   FORMAT
+===================================================== */
+
+function formatNumber(number){
+
+  return Number(number)
+    .toLocaleString();
+
+}
+
+
+/* =====================================================
+   CHANGE BET
+===================================================== */
+
+function changeBet(){
+
+  if(spinning){
+
+    document
+      .getElementById("betSelect")
+      .value =
+        String(bet);
+
+    return;
 
   }
 
 
-  bet = newBet;
+  const selected =
+    Number(
+      document
+        .getElementById("betSelect")
+        .value
+    );
+
+
+  if(
+    !BETS.includes(selected)
+  ){
+
+    bet = 10;
+
+  }
+
+  else{
+
+    bet = selected;
+
+  }
+
 
   updateGame();
 
 }
 
 
-/* =========================================
+/* =====================================================
    SPIN
-========================================= */
+===================================================== */
 
 function spin(){
 
-  if(spinning) return;
+  if(spinning){
+
+    return;
+
+  }
 
 
-  let isFreeSpin =
+  const isFree =
     freeSpins > 0;
 
 
   if(
-    !isFreeSpin &&
+    !isFree &&
     currentUser.balance < bet
   ){
+
+    stopAuto();
 
     alert(
       "Not enough coins"
@@ -1093,7 +1323,7 @@ function spin(){
     .disabled = true;
 
 
-  if(isFreeSpin){
+  if(isFree){
 
     freeSpins--;
 
@@ -1119,205 +1349,262 @@ function spin(){
   currentUser.spins++;
 
 
-  cells.forEach(c => {
+  cells.forEach(
+    cell => {
 
-    c.classList.remove(
-      "win"
-    );
-
-    c.classList.remove(
-      "scatter"
-    );
-
-    c.classList.add(
-      "spin"
-    );
-
-  });
-
-
-  const interval =
-    setInterval(() => {
-
-      cells.forEach(c => {
-
-        c.innerText =
-          randomSymbol();
-
-      });
-
-    },100);
-
-
-  setTimeout(() => {
-
-    clearInterval(interval);
-
-
-    cells.forEach(c => {
-
-      c.innerText =
-        randomSymbol();
-
-      c.classList.remove(
-        "spin"
+      cell.classList.remove(
+        "win"
       );
 
-    });
-
-
-    /* Scatter */
-
-    let scatterResult =
-      checkScatter();
-
-
-    /* Normal Win */
-
-    let win =
-      checkWins();
-
-
-    currentUser.balance +=
-      win;
-
-
-    currentUser.history.push({
-
-      time:
-        new Date()
-        .toLocaleString(),
-
-      bet:
-        isFreeSpin
-        ? 0
-        : bet,
-
-      win:win,
-
-      freeSpin:
-        isFreeSpin,
-
-      scatters:
-        scatterResult
-
-    });
-
-
-    saveCurrentUser();
-
-
-    updateGame();
-
-
-    spinning = false;
-
-
-    document
-      .getElementById("spinBtn")
-      .disabled = false;
-
-
-    if(win > 0){
-
-      showWinPopup(win);
-
-    }
-
-  },1500);
-
-}
-
-
-/* =========================================
-   SCATTER
-========================================= */
-
-function checkScatter(){
-
-  let scatterCount = 0;
-
-
-  cells.forEach(cell => {
-
-    if(
-      cell.innerText ===
-      SCATTER
-    ){
-
-      scatterCount++;
-
-      cell.classList.add(
+      cell.classList.remove(
         "scatter"
       );
 
+      cell.classList.add(
+        "spin"
+      );
+
     }
-
-  });
-
-
-  if(scatterCount >= 5){
-
-    freeSpins += 12;
-
-    document
-      .getElementById("message")
-      .innerText =
-        "🎁 5 SCATTERS! +12 FREE SPINS!";
-
-  }
-
-  else if(scatterCount === 4){
-
-    freeSpins += 8;
-
-    document
-      .getElementById("message")
-      .innerText =
-        "🎁 4 SCATTERS! +8 FREE SPINS!";
-
-  }
-
-  else if(scatterCount === 3){
-
-    freeSpins += 5;
-
-    document
-      .getElementById("message")
-      .innerText =
-        "🎁 3 SCATTERS! +5 FREE SPINS!";
-
-  }
+  );
 
 
-  return scatterCount;
+  const interval =
+    setInterval(
+      () => {
+
+        cells.forEach(
+          cell => {
+
+            cell.innerText =
+              randomSymbol();
+
+          }
+        );
+
+      },
+      90
+    );
+
+
+  setTimeout(
+    () => {
+
+      clearInterval(interval);
+
+
+      cells.forEach(
+        cell => {
+
+          cell.innerText =
+            randomSymbol();
+
+          cell.classList.remove(
+            "spin"
+          );
+
+        }
+      );
+
+
+      /*
+       * FREE SPIN EVERY 150 COMPLETED SPINS
+       */
+
+      let milestone =
+        currentUser.spins % 150 === 0;
+
+
+      if(milestone){
+
+        freeSpins += 5;
+
+      }
+
+
+      /*
+       * CHECK SCATTER DISPLAY
+       */
+
+      let scatterCount =
+        countScatters();
+
+
+      /*
+       * CHECK WIN
+       */
+
+      let win =
+        checkWins();
+
+
+      currentUser.balance +=
+        win;
+
+
+      /*
+       * HISTORY
+       */
+
+      currentUser.history.push({
+
+        time:
+          new Date()
+            .toLocaleString(),
+
+        bet:
+          isFree
+            ? 0
+            : bet,
+
+        win:
+          win,
+
+        freeSpin:
+          isFree,
+
+        scatter:
+          scatterCount,
+
+        totalSpins:
+          currentUser.spins
+
+      });
+
+
+      saveCurrentUser();
+
+      updateGame();
+
+
+      if(milestone){
+
+        document
+          .getElementById("message")
+          .innerText =
+            "🎁 150 SPINS COMPLETE! +5 FREE SPINS!";
+
+      }
+
+
+      if(win > 0){
+
+        showWinPopup(win);
+
+      }
+
+      else if(
+        !milestone
+      ){
+
+        document
+          .getElementById("message")
+          .innerText =
+            "😔 No Win";
+
+      }
+
+
+      spinning = false;
+
+
+      document
+        .getElementById("spinBtn")
+        .disabled = false;
+
+
+      /*
+       * AUTO SPIN
+       */
+
+      if(autoSpin){
+
+        autoTimer =
+          setTimeout(
+            () => {
+
+              if(
+                autoSpin &&
+                !spinning
+              ){
+
+                spin();
+
+              }
+
+            },
+            700
+          );
+
+      }
+
+    },
+    1500
+  );
 
 }
 
 
-/* =========================================
+/* =====================================================
+   COUNT SCATTER
+===================================================== */
+
+function countScatters(){
+
+  let count = 0;
+
+
+  cells.forEach(
+    cell => {
+
+      if(
+        cell.innerText ===
+        SCATTER
+      ){
+
+        count++;
+
+        cell.classList.add(
+          "scatter"
+        );
+
+      }
+
+    }
+  );
+
+
+  return count;
+
+}
+
+
+/* =====================================================
    WIN CHECK
-   Horizontal rows
-========================================= */
+   Horizontal 5 rows
+===================================================== */
 
 function checkWins(){
 
   let totalWin = 0;
 
 
+  /*
+   * Check each of 5 horizontal rows
+   */
+
   for(
-    let row = 0;
-    row < 5;
+    let row=0;
+    row<5;
     row++
   ){
 
-    let start =
+    const start =
       row * 5;
 
 
-    let best = 1;
+    let bestCount = 1;
 
-    let count = 1;
+    let currentCount = 1;
 
     let bestStart = 0;
 
@@ -1325,8 +1612,8 @@ function checkWins(){
 
 
     for(
-      let col = 1;
-      col < 5;
+      let col=1;
+      col<5;
       col++
     ){
 
@@ -1342,29 +1629,31 @@ function checkWins(){
         ].innerText;
 
 
-      /* Scatter does not count */
-
       if(
         current === previous &&
         current !== SCATTER
       ){
 
-        count++;
+        currentCount++;
 
       }
 
       else{
 
-        count = 1;
+        currentCount = 1;
 
         currentStart = col;
 
       }
 
 
-      if(count > best){
+      if(
+        currentCount >
+        bestCount
+      ){
 
-        best = count;
+        bestCount =
+          currentCount;
 
         bestStart =
           currentStart;
@@ -1377,36 +1666,50 @@ function checkWins(){
     let multiplier = 0;
 
 
-    /* 3 = 100% */
+    /*
+     * 3 = 100%
+     */
 
-    if(best === 3){
+    if(
+      bestCount === 3
+    ){
 
       multiplier = 1;
 
     }
 
 
-    /* 4 = 150% */
+    /*
+     * 4 = 150%
+     */
 
-    else if(best === 4){
+    else if(
+      bestCount === 4
+    ){
 
       multiplier = 1.5;
 
     }
 
 
-    /* 5 = 200% */
+    /*
+     * 5 = 200%
+     */
 
-    else if(best >= 5){
+    else if(
+      bestCount >= 5
+    ){
 
       multiplier = 2;
 
     }
 
 
-    if(multiplier > 0){
+    if(
+      multiplier > 0
+    ){
 
-      let win =
+      const win =
         Math.floor(
           bet *
           multiplier
@@ -1417,8 +1720,10 @@ function checkWins(){
 
 
       for(
-        let i = bestStart;
-        i < bestStart + best;
+        let i=bestStart;
+        i<
+          bestStart +
+          bestCount;
         i++
       ){
 
@@ -1440,47 +1745,33 @@ function checkWins(){
 }
 
 
-/* =========================================
+/* =====================================================
    WIN POPUP
-========================================= */
+===================================================== */
 
 function showWinPopup(win){
 
   const title =
     document
-      .getElementById("winTitle");
+      .getElementById(
+        "winTitle"
+      );
 
 
   const amount =
     document
-      .getElementById("winAmount");
+      .getElementById(
+        "winAmount"
+      );
 
 
   /*
-    WIN LEVEL
-  */
-
+   * BIG WIN
+   */
 
   if(
-    win >= bet * 20
-  ){
-
-    title.innerText =
-      "⚡⚡ SPIN WIN ⚡⚡";
-
-  }
-
-  else if(
-    win >= bet * 10
-  ){
-
-    title.innerText =
-      "🔥 SUPER WIN 🔥";
-
-  }
-
-  else if(
-    win >= bet * 5
+    win >= bet * 5 &&
+    win < bet * 10
   ){
 
     title.innerText =
@@ -1488,22 +1779,57 @@ function showWinPopup(win){
 
   }
 
+
+  /*
+   * SUPER WIN
+   */
+
+  else if(
+    win >= bet * 10 &&
+    win < bet * 20
+  ){
+
+    title.innerText =
+      "🔥 SUPER WIN 🔥";
+
+  }
+
+
+  /*
+   * SPIN WIN
+   */
+
+  else if(
+    win >= bet * 20
+  ){
+
+    title.innerText =
+      "⚡ SPIN WIN ⚡";
+
+  }
+
+
   else{
 
     title.innerText =
-      "🎊 WIN! 🎊";
+      "🎊 WIN 🎊";
 
   }
 
 
   amount.innerText =
-    "+" + win +
+    "+" +
+    formatNumber(win) +
     " COINS";
 
 
   document
-    .getElementById("winPopup")
-    .classList.add("show");
+    .getElementById(
+      "winPopup"
+    )
+    .classList.add(
+      "show"
+    );
 
 }
 
@@ -1511,23 +1837,112 @@ function showWinPopup(win){
 function closeWinPopup(){
 
   document
-    .getElementById("winPopup")
-    .classList.remove("show");
+    .getElementById(
+      "winPopup"
+    )
+    .classList.remove(
+      "show"
+    );
 
 }
 
 
-/* =========================================
-   SAVE USER
-========================================= */
+/* =====================================================
+   AUTO SPIN
+===================================================== */
+
+function toggleAuto(){
+
+  if(autoSpin){
+
+    stopAuto();
+
+    return;
+
+  }
+
+
+  autoSpin = true;
+
+
+  document
+    .getElementById("autoBtn")
+    .innerText =
+      "⏹ AUTO ON";
+
+
+  document
+    .getElementById("autoBtn")
+    .classList.remove(
+      "green"
+    );
+
+
+  document
+    .getElementById("autoBtn")
+    .classList.add(
+      "red"
+    );
+
+
+  if(!spinning){
+
+    spin();
+
+  }
+
+}
+
+
+function stopAuto(){
+
+  autoSpin = false;
+
+
+  if(autoTimer){
+
+    clearTimeout(
+      autoTimer
+    );
+
+    autoTimer = null;
+
+  }
+
+
+  document
+    .getElementById("autoBtn")
+    .innerText =
+      "🔄 AUTO SPIN";
+
+
+  document
+    .getElementById("autoBtn")
+    .classList.remove(
+      "red"
+    );
+
+
+  document
+    .getElementById("autoBtn")
+    .classList.add(
+      "green"
+    );
+
+}
+
+
+/* =====================================================
+   SAVE CURRENT PLAYER
+===================================================== */
 
 function saveCurrentUser(){
 
-  let players =
+  const players =
     getPlayers();
 
 
-  let index =
+  const index =
     players.findIndex(
       p =>
         p.id ===
@@ -1540,6 +1955,7 @@ function saveCurrentUser(){
     players[index] =
       currentUser;
 
+
     savePlayers(players);
 
   }
@@ -1547,23 +1963,31 @@ function saveCurrentUser(){
 }
 
 
-/* =========================================
+/* =====================================================
    HISTORY
-========================================= */
+===================================================== */
 
 function showHistory(){
+
+  stopAuto();
 
   hideAll();
 
 
   document
-    .getElementById("historyPage")
-    .classList.remove("hidden");
+    .getElementById(
+      "historyPage"
+    )
+    .classList.remove(
+      "hidden"
+    );
 
 
   const box =
     document
-      .getElementById("history");
+      .getElementById(
+        "history"
+      );
 
 
   box.innerHTML = "";
@@ -1576,7 +2000,7 @@ function showHistory(){
 
     box.innerHTML =
       "<p class='small'>" +
-      "No game history yet." +
+      "No history yet." +
       "</p>";
 
     return;
@@ -1587,42 +2011,54 @@ function showHistory(){
   currentUser.history
     .slice()
     .reverse()
-    .forEach(h => {
+    .forEach(
+      h => {
+
+        const item =
+          document
+            .createElement(
+              "div"
+            );
 
 
-      const item =
-        document
-          .createElement("div");
+        item.className =
+          "history-item";
 
 
-      item.className =
-        "history-item";
+        item.innerHTML =
+
+          "📅 " +
+          h.time +
+
+          "<br>💰 BET: " +
+          formatNumber(
+            h.bet
+          ) +
+
+          "<br>🏆 WIN: " +
+          formatNumber(
+            h.win
+          ) +
+
+          "<br>🎁 SCATTER: " +
+          h.scatter +
+
+          "<br>🎰 TOTAL SPINS: " +
+          h.totalSpins +
+
+          (
+            h.freeSpin
+              ? "<br>🎁 FREE SPIN USED"
+              : ""
+          );
 
 
-      item.innerHTML =
-
-        "🎰 " +
-        h.time +
-
-        "<br>💰 BET: " +
-        h.bet +
-
-        "<br>🏆 WIN: " +
-        h.win +
-
-        "<br>🎁 SCATTERS: " +
-        h.scatters +
-
-        (
-          h.freeSpin
-          ? "<br>🎁 FREE SPIN"
-          : ""
+        box.appendChild(
+          item
         );
 
-
-      box.appendChild(item);
-
-    });
+      }
+    );
 
 }
 
@@ -1631,10 +2067,13 @@ function backGame(){
 
   hideAll();
 
-
   document
-    .getElementById("gamePage")
-    .classList.remove("hidden");
+    .getElementById(
+      "gamePage"
+    )
+    .classList.remove(
+      "hidden"
+    );
 
 
   updateGame();
@@ -1642,9 +2081,9 @@ function backGame(){
 }
 
 
-/* =========================================
+/* =====================================================
    ADMIN
-========================================= */
+===================================================== */
 
 function loadAdminPlayers(){
 
@@ -1659,10 +2098,57 @@ function loadAdminPlayers(){
       );
 
 
+  const stats =
+    document
+      .getElementById(
+        "adminStats"
+      );
+
+
+  let totalCoins = 0;
+
+  let totalSpins = 0;
+
+
+  players.forEach(
+    p => {
+
+      totalCoins +=
+        Number(
+          p.balance
+        );
+
+      totalSpins +=
+        Number(
+          p.spins
+        );
+
+    }
+  );
+
+
+  stats.innerHTML =
+
+    "👤 PLAYERS: " +
+    players.length +
+
+    "<br>💰 TOTAL COINS: " +
+    formatNumber(
+      totalCoins
+    ) +
+
+    "<br>🎰 TOTAL SPINS: " +
+    formatNumber(
+      totalSpins
+    );
+
+
   box.innerHTML = "";
 
 
-  if(players.length === 0){
+  if(
+    players.length === 0
+  ){
 
     box.innerHTML =
       "<p class='small'>" +
@@ -1674,94 +2160,170 @@ function loadAdminPlayers(){
   }
 
 
-  players.forEach(player => {
+  players.forEach(
+    player => {
 
 
-    const div =
-      document
-        .createElement("div");
+      const div =
+        document
+          .createElement(
+            "div"
+          );
 
 
-    div.className =
-      "player";
+      div.className =
+        "player";
 
 
-    div.innerHTML =
+      div.innerHTML =
 
-      "<b>👤 " +
-      escapeHTML(
-        player.name
-      ) +
-      "</b>" +
+        "<b>👤 " +
+        escapeHTML(
+          player.name
+        ) +
+        "</b>" +
 
-      "<br>📱 " +
-      escapeHTML(
-        player.phone
-      ) +
+        "<br>📱 " +
+        escapeHTML(
+          player.phone
+        ) +
 
-      "<br>💰 Coins: " +
-      player.balance +
+        "<br>💰 COINS: " +
+        formatNumber(
+          player.balance
+        ) +
 
-      "<br>🎰 Spins: " +
-      player.spins +
+        "<br>🎰 SPINS: " +
+        formatNumber(
+          player.spins
+        ) +
 
-      "<br>Status: " +
+        "<br>🎁 NEXT FREE: " +
+        (
+          150 -
+          (
+            player.spins % 150
+          )
+        ) +
 
-      (
+        "<br>STATUS: " +
+
+        (
+          player.blocked
+            ? "🚫 BLOCKED"
+            : "✅ ACTIVE"
+        );
+
+
+      const add =
+        document
+          .createElement(
+            "button"
+          );
+
+      add.className =
+        "green";
+
+      add.innerText =
+        "➕ ADD COINS";
+
+      add.onclick =
+        () =>
+          addCoins(
+            player.id
+          );
+
+
+      const remove =
+        document
+          .createElement(
+            "button"
+          );
+
+      remove.className =
+        "red";
+
+      remove.innerText =
+        "➖ REMOVE COINS";
+
+      remove.onclick =
+        () =>
+          removeCoins(
+            player.id
+          );
+
+
+      const block =
+        document
+          .createElement(
+            "button"
+          );
+
+      block.className =
+        "blue";
+
+      block.innerText =
         player.blocked
-        ? "🚫 BLOCKED"
-        : "✅ ACTIVE"
-      ) +
+          ? "✅ UNBLOCK"
+          : "🚫 BLOCK";
+
+      block.onclick =
+        () =>
+          toggleBlock(
+            player.id
+          );
 
 
-      "<button class='green' onclick='addCoins(" +
-      player.id +
-      ")'>" +
-      "➕ ADD COINS" +
-      "</button>" +
+      const history =
+        document
+          .createElement(
+            "button"
+          );
+
+      history.innerText =
+        "📜 VIEW HISTORY";
+
+      history.onclick =
+        () =>
+          viewPlayerHistory(
+            player.id
+          );
 
 
-      "<button class='danger' onclick='removeCoins(" +
-      player.id +
-      ")'>" +
-      "➖ REMOVE COINS" +
-      "</button>" +
+      div.appendChild(
+        add
+      );
+
+      div.appendChild(
+        remove
+      );
+
+      div.appendChild(
+        block
+      );
+
+      div.appendChild(
+        history
+      );
 
 
-      "<button class='blue' onclick='toggleBlock(" +
-      player.id +
-      ")'>" +
+      box.appendChild(
+        div
+      );
 
-      (
-        player.blocked
-        ? "✅ UNBLOCK"
-        : "🚫 BLOCK"
-      ) +
-
-      "</button>" +
-
-
-      "<button onclick='viewPlayerHistory(" +
-      player.id +
-      ")'>" +
-      "📜 VIEW HISTORY" +
-      "</button>";
-
-
-    box.appendChild(div);
-
-  });
+    }
+  );
 
 }
 
 
-/* =========================================
-   ADMIN COINS
-========================================= */
+/* =====================================================
+   ADMIN ADD COINS
+===================================================== */
 
 function addCoins(id){
 
-  let amount =
+  const amount =
     Number(
       prompt(
         "Coins to add:"
@@ -1772,7 +2334,11 @@ function addCoins(id){
   if(
     !amount ||
     amount <= 0
-  ) return;
+  ){
+
+    return;
+
+  }
 
 
   updatePlayerCoins(
@@ -1785,7 +2351,7 @@ function addCoins(id){
 
 function removeCoins(id){
 
-  let amount =
+  const amount =
     Number(
       prompt(
         "Coins to remove:"
@@ -1796,7 +2362,11 @@ function removeCoins(id){
   if(
     !amount ||
     amount <= 0
-  ) return;
+  ){
+
+    return;
+
+  }
 
 
   updatePlayerCoins(
@@ -1812,18 +2382,22 @@ function updatePlayerCoins(
   amount
 ){
 
-  let players =
+  const players =
     getPlayers();
 
 
-  let player =
+  const player =
     players.find(
       p =>
         p.id === id
     );
 
 
-  if(!player) return;
+  if(!player){
+
+    return;
+
+  }
 
 
   player.balance +=
@@ -1847,24 +2421,28 @@ function updatePlayerCoins(
 }
 
 
-/* =========================================
-   ADMIN BLOCK
-========================================= */
+/* =====================================================
+   BLOCK
+===================================================== */
 
 function toggleBlock(id){
 
-  let players =
+  const players =
     getPlayers();
 
 
-  let player =
+  const player =
     players.find(
       p =>
         p.id === id
     );
 
 
-  if(!player) return;
+  if(!player){
+
+    return;
+
+  }
 
 
   player.blocked =
@@ -1879,24 +2457,28 @@ function toggleBlock(id){
 }
 
 
-/* =========================================
+/* =====================================================
    ADMIN HISTORY
-========================================= */
+===================================================== */
 
 function viewPlayerHistory(id){
 
-  let players =
+  const players =
     getPlayers();
 
 
-  let player =
+  const player =
     players.find(
       p =>
         p.id === id
     );
 
 
-  if(!player) return;
+  if(!player){
+
+    return;
+
+  }
 
 
   if(
@@ -1914,35 +2496,37 @@ function viewPlayerHistory(id){
 
 
   let text =
-
     "PLAYER: " +
     player.name +
-
     "\n\n";
 
 
   player.history
     .slice()
     .reverse()
-    .forEach(h => {
+    .forEach(
+      h => {
 
+        text +=
 
-      text +=
+          h.time +
 
-        h.time +
+          "\nBET: " +
+          h.bet +
 
-        "\nBET: " +
-        h.bet +
+          "\nWIN: " +
+          h.win +
 
-        " | WIN: " +
-        h.win +
+          "\nSCATTER: " +
+          h.scatter +
 
-        "\nSCATTERS: " +
-        h.scatters +
+          "\nTOTAL SPINS: " +
+          h.totalSpins +
 
-        "\n\n";
+          "\n----------------\n";
 
-    });
+      }
+    );
 
 
   alert(text);
@@ -1950,18 +2534,61 @@ function viewPlayerHistory(id){
 }
 
 
-/* =========================================
-   SECURITY HELPER
-========================================= */
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout(){
+
+  stopAuto();
+
+  currentUser = null;
+
+  freeSpins = 0;
+
+  spinning = false;
+
+  hideAll();
+
+
+  document
+    .getElementById(
+      "loginPage"
+    )
+    .classList.remove(
+      "hidden"
+    );
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
 
 function escapeHTML(text){
 
   return String(text)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+    .replace(
+      /</g,
+      "&lt;"
+    )
+    .replace(
+      />/g,
+      "&gt;"
+    )
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
