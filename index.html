@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Monkey Slot Game</title>
+<title>Monkey Slot 5x5</title>
 
 <style>
 *{
@@ -15,127 +14,115 @@
 }
 
 body{
-  font-family:Arial, sans-serif;
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  background:
-    radial-gradient(circle at top, #49351a, #17100a 65%);
+  font-family:Arial,sans-serif;
+  background:radial-gradient(circle at top,#59411d,#160e08 70%);
   color:white;
+  min-height:100vh;
 }
 
 .game{
   width:100%;
-  max-width:430px;
-  padding:15px;
-}
-
-.header{
-  text-align:center;
-  margin-bottom:15px;
+  max-width:600px;
+  margin:auto;
+  padding:12px;
 }
 
 .logo{
-  font-size:30px;
+  text-align:center;
+  font-size:28px;
   font-weight:bold;
   color:#ffd54a;
-  text-shadow:
-    0 3px 0 #7a4b00,
-    0 0 15px #ffb300;
+  padding:15px 5px;
+  text-shadow:0 3px 0 #754300,0 0 15px #ffb300;
 }
 
-.subtitle{
-  margin-top:6px;
-  color:#ffe7a1;
-  font-size:13px;
-}
-
-.balance-box{
+.top-info{
   display:flex;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:15px;
+  gap:8px;
+  margin-bottom:12px;
 }
 
 .info{
   flex:1;
-  background:linear-gradient(#3b2b17,#21170d);
-  border:2px solid #a8751d;
-  border-radius:12px;
-  padding:10px;
   text-align:center;
+  padding:10px;
+  border-radius:12px;
+  background:linear-gradient(#3b2a16,#21150b);
+  border:2px solid #a8751d;
 }
 
 .info small{
   display:block;
   color:#d7b86c;
-  font-size:11px;
 }
 
 .info strong{
   display:block;
   margin-top:4px;
-  color:#fff0a5;
-  font-size:19px;
+  color:#ffd54a;
+  font-size:20px;
 }
 
-.slot-machine{
-  background:linear-gradient(145deg,#d39a20,#6b3d08);
-  border:5px solid #f7c849;
-  border-radius:25px;
-  padding:14px;
-  box-shadow:
-    0 10px 30px rgba(0,0,0,.6),
-    inset 0 0 20px rgba(255,230,120,.3);
-}
-
-.reels{
-  display:flex;
-  gap:8px;
-  background:#160e08;
+.machine{
+  background:linear-gradient(145deg,#c98b19,#603607);
   padding:10px;
-  border-radius:16px;
-  border:3px solid #482708;
+  border:4px solid #f4c33e;
+  border-radius:22px;
+  box-shadow:0 8px 25px rgba(0,0,0,.6);
 }
 
-.reel{
-  flex:1;
-  height:115px;
-  background:linear-gradient(#fff7dc,#d9c58c);
-  border-radius:12px;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  grid-template-rows:repeat(5,1fr);
+  gap:5px;
+  background:#180e07;
+  padding:8px;
+  border-radius:14px;
+}
+
+.cell{
+  aspect-ratio:1/1;
+  min-height:52px;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:60px;
-  color:#111;
-  border:3px solid #8e681c;
-  overflow:hidden;
+  font-size:clamp(28px,8vw,48px);
+  background:linear-gradient(#fff8df,#d8c385);
+  border:2px solid #8c6418;
+  border-radius:9px;
+  transition:transform .2s,background .2s;
 }
 
-.reel.spinning{
-  animation:shake .12s infinite;
+.cell.spinning{
+  animation:spinCell .12s infinite;
 }
 
-@keyframes shake{
-  0%{transform:translateY(-4px)}
-  50%{transform:translateY(4px)}
-  100%{transform:translateY(-4px)}
+@keyframes spinCell{
+  0%{transform:translateY(-3px)}
+  50%{transform:translateY(3px)}
+  100%{transform:translateY(-3px)}
 }
 
-.win-line{
+.cell.win{
+  background:linear-gradient(#fffbd5,#ffd028);
+  box-shadow:0 0 12px #fff,0 0 20px #ffb300;
+  transform:scale(1.05);
+}
+
+.message{
   margin-top:10px;
   text-align:center;
-  background:#27170b;
-  padding:10px;
+  padding:12px;
+  min-height:45px;
+  background:#241509;
   border-radius:10px;
-  color:#ffd85a;
+  color:#ffd54a;
   font-weight:bold;
-  min-height:40px;
 }
 
 .controls{
-  margin-top:15px;
+  margin-top:12px;
   background:rgba(0,0,0,.3);
   padding:12px;
   border-radius:15px;
@@ -143,84 +130,70 @@ body{
 
 .bet-row{
   display:flex;
+  justify-content:center;
   align-items:center;
-  justify-content:space-between;
-  gap:10px;
-}
-
-.bet-label{
-  color:#ffe49a;
-  font-weight:bold;
-}
-
-.bet-control{
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-
-button{
-  border:none;
-  cursor:pointer;
-  font-weight:bold;
-  color:white;
-  transition:.15s;
-}
-
-button:active{
-  transform:scale(.96);
+  gap:12px;
 }
 
 .small-btn{
-  width:42px;
-  height:40px;
+  width:45px;
+  height:42px;
+  border:none;
   border-radius:10px;
-  background:linear-gradient(#75501c,#3a250c);
-  border:1px solid #c6922d;
+  color:white;
   font-size:22px;
+  background:linear-gradient(#79531d,#382209);
+  border:1px solid #c8932c;
 }
 
 .bet-value{
-  min-width:70px;
+  min-width:80px;
   text-align:center;
-  padding:10px;
+  padding:11px;
+  background:#160d07;
+  border:1px solid #b68021;
   border-radius:10px;
-  background:#17100a;
-  border:1px solid #a8751d;
   color:#ffd54a;
+  font-weight:bold;
 }
 
 .spin-btn{
   width:100%;
-  margin-top:14px;
+  margin-top:12px;
   padding:16px;
-  font-size:22px;
+  border:none;
   border-radius:14px;
-  background:linear-gradient(#ffcc38,#b56b00);
-  border:3px solid #ffe78a;
-  color:#351b00;
-  box-shadow:0 5px 0 #6c3d00;
+  background:linear-gradient(#ffda3d,#b96800);
+  border:3px solid #ffe78c;
+  color:#321900;
+  font-size:22px;
+  font-weight:bold;
+  box-shadow:0 4px 0 #704000;
 }
 
-.spin-btn:disabled{
+button:active{
+  transform:scale(.97);
+}
+
+button:disabled{
   opacity:.6;
 }
 
 .rules{
-  margin-top:15px;
+  margin-top:12px;
   padding:12px;
-  background:rgba(0,0,0,.3);
   border-radius:12px;
-  color:#e8d6a0;
+  background:rgba(0,0,0,.3);
+  color:#ead9a7;
   font-size:12px;
   line-height:1.6;
 }
 
 .footer{
   text-align:center;
-  margin-top:12px;
-  color:#9b8b69;
+  margin:12px;
   font-size:11px;
+  color:#bba979;
 }
 </style>
 </head>
@@ -229,13 +202,9 @@ button:active{
 
 <div class="game">
 
-  <div class="header">
-    <div class="logo">🐵 MONKEY SLOT 🐵</div>
-    <div class="subtitle">DEMO GAME • FOR ENTERTAINMENT</div>
-  </div>
+  <div class="logo">🐵 MONKEY SLOT 5×5 🐵</div>
 
-  <div class="balance-box">
-
+  <div class="top-info">
     <div class="info">
       <small>COINS</small>
       <strong id="balance">1000</strong>
@@ -245,35 +214,24 @@ button:active{
       <small>BET</small>
       <strong id="topBet">10</strong>
     </div>
-
   </div>
 
-  <div class="slot-machine">
+  <div class="machine">
 
-    <div class="reels">
-      <div class="reel" id="reel1">🐵</div>
-      <div class="reel" id="reel2">🍌</div>
-      <div class="reel" id="reel3">🐯</div>
-    </div>
+    <div class="grid" id="grid"></div>
 
-    <div class="win-line" id="message">
-      Press SPIN to play!
+    <div class="message" id="message">
+      🎰 SPIN to play!
     </div>
 
     <div class="controls">
 
       <div class="bet-row">
+        <button class="small-btn" onclick="changeBet(-10)">−</button>
 
-        <div class="bet-label">BET</div>
+        <div class="bet-value" id="bet">10</div>
 
-        <div class="bet-control">
-          <button class="small-btn" onclick="changeBet(-10)">−</button>
-
-          <div class="bet-value" id="bet">10</div>
-
-          <button class="small-btn" onclick="changeBet(10)">+</button>
-        </div>
-
+        <button class="small-btn" onclick="changeBet(10)">+</button>
       </div>
 
       <button class="spin-btn" id="spinBtn" onclick="spin()">
@@ -285,30 +243,74 @@ button:active{
   </div>
 
   <div class="rules">
-    🐵 🐵 🐵 = 10x BET<br>
-    🍌 🍌 🍌 = 5x BET<br>
-    🐯 🐯 🐯 = 3x BET<br>
-    Any other combination = Try again!
+    🐵 5 တန်းဆက် = 10× BET<br>
+    🍌 5 တန်းဆက် = 5× BET<br>
+    🐯 5 တန်းဆက် = 3× BET<br>
+    🦁 5 တန်းဆက် = 2× BET<br>
+    အလျားလိုက်၊ ဒေါင်လိုက် 5 ခုတန်းဆက်ရင် WIN!
   </div>
 
   <div class="footer">
-    Demo virtual coins only • No real-money betting
+    Demo virtual coins only
   </div>
 
 </div>
 
 <script>
 
-const symbols = ["🐵","🍌","🐯","🦁","🍇","🥥"];
+const symbols = [
+  "🐵",
+  "🍌",
+  "🐯",
+  "🦁",
+  "🍇",
+  "🥥"
+];
 
 let balance = 1000;
 let bet = 10;
 let spinning = false;
+let cells = [];
+
+/* Create 5 x 5 = 25 cells */
+
+function createGrid(){
+
+  const grid = document.getElementById("grid");
+
+  for(let i = 0; i < 25; i++){
+
+    const cell = document.createElement("div");
+
+    cell.className = "cell";
+
+    cell.innerText = randomSymbol();
+
+    grid.appendChild(cell);
+
+    cells.push(cell);
+  }
+}
+
+function randomSymbol(){
+
+  return symbols[
+    Math.floor(Math.random() * symbols.length)
+  ];
+
+}
 
 function updateUI(){
-  document.getElementById("balance").innerText = balance;
-  document.getElementById("bet").innerText = bet;
-  document.getElementById("topBet").innerText = bet;
+
+  document.getElementById("balance").innerText =
+    balance;
+
+  document.getElementById("bet").innerText =
+    bet;
+
+  document.getElementById("topBet").innerText =
+    bet;
+
 }
 
 function changeBet(amount){
@@ -332,10 +334,7 @@ function changeBet(amount){
   bet = newBet;
 
   updateUI();
-}
 
-function randomSymbol(){
-  return symbols[Math.floor(Math.random() * symbols.length)];
 }
 
 function spin(){
@@ -343,8 +342,10 @@ function spin(){
   if(spinning) return;
 
   if(balance < bet){
+
     document.getElementById("message").innerText =
-      "Not enough demo coins!";
+      "❌ Not enough demo coins!";
+
     return;
   }
 
@@ -357,43 +358,41 @@ function spin(){
   document.getElementById("spinBtn").disabled = true;
 
   document.getElementById("message").innerText =
-    "Spinning...";
+    "🎰 SPINNING...";
 
-  const reels = [
-    document.getElementById("reel1"),
-    document.getElementById("reel2"),
-    document.getElementById("reel3")
-  ];
+  cells.forEach(cell => {
 
-  reels.forEach(reel => {
-    reel.classList.add("spinning");
+    cell.classList.remove("win");
+
+    cell.classList.add("spinning");
+
   });
+
 
   let interval = setInterval(() => {
 
-    reels.forEach(reel => {
-      reel.innerText = randomSymbol();
+    cells.forEach(cell => {
+
+      cell.innerText = randomSymbol();
+
     });
 
   },100);
+
 
   setTimeout(() => {
 
     clearInterval(interval);
 
-    let result1 = randomSymbol();
-    let result2 = randomSymbol();
-    let result3 = randomSymbol();
+    cells.forEach(cell => {
 
-    reels[0].innerText = result1;
-    reels[1].innerText = result2;
-    reels[2].innerText = result3;
+      cell.innerText = randomSymbol();
 
-    reels.forEach(reel => {
-      reel.classList.remove("spinning");
+      cell.classList.remove("spinning");
+
     });
 
-    checkWin(result1,result2,result3);
+    checkWins();
 
     spinning = false;
 
@@ -401,43 +400,156 @@ function spin(){
 
     updateUI();
 
-  },1500);
+  },1800);
+
 }
 
-function checkWin(a,b,c){
 
-  let win = 0;
+/* Check horizontal and vertical wins */
 
-  if(a === "🐵" && b === "🐵" && c === "🐵"){
-    win = bet * 10;
-    document.getElementById("message").innerText =
-      "🎉 JACKPOT! You won " + win + " coins!";
+function checkWins(){
+
+  let totalWin = 0;
+
+  let winningCells = [];
+
+
+  /* Horizontal rows */
+
+  for(let row = 0; row < 5; row++){
+
+    let start = row * 5;
+
+    let symbol =
+      cells[start].innerText;
+
+    let matched = true;
+
+    for(let col = 1; col < 5; col++){
+
+      if(
+        cells[start + col].innerText
+        !== symbol
+      ){
+        matched = false;
+      }
+
+    }
+
+    if(matched){
+
+      let result =
+        calculateWin(symbol);
+
+      totalWin += result;
+
+      for(let col = 0; col < 5; col++){
+
+        winningCells.push(
+          start + col
+        );
+
+      }
+
+    }
+
   }
 
-  else if(a === "🍌" && b === "🍌" && c === "🍌"){
-    win = bet * 5;
-    document.getElementById("message").innerText =
-      "🍌 BIG WIN! You won " + win + " coins!";
+
+  /* Vertical columns */
+
+  for(let col = 0; col < 5; col++){
+
+    let symbol =
+      cells[col].innerText;
+
+    let matched = true;
+
+    for(let row = 1; row < 5; row++){
+
+      if(
+        cells[row * 5 + col].innerText
+        !== symbol
+      ){
+        matched = false;
+      }
+
+    }
+
+    if(matched){
+
+      let result =
+        calculateWin(symbol);
+
+      totalWin += result;
+
+      for(let row = 0; row < 5; row++){
+
+        winningCells.push(
+          row * 5 + col
+        );
+
+      }
+
+    }
+
   }
 
-  else if(a === "🐯" && b === "🐯" && c === "🐯"){
-    win = bet * 3;
+
+  /* Highlight winning cells */
+
+  winningCells.forEach(index => {
+
+    cells[index].classList.add("win");
+
+  });
+
+
+  if(totalWin > 0){
+
+    balance += totalWin;
+
     document.getElementById("message").innerText =
-      "🔥 WIN! You won " + win + " coins!";
+      "🎉 WIN! +" +
+      totalWin +
+      " COINS!";
+
   }
 
   else{
+
     document.getElementById("message").innerText =
-      "No win. Try again!";
+      "😔 No win. Try again!";
+
   }
 
-  balance += win;
-
-  if(balance <= 0){
-    document.getElementById("message").innerText =
-      "Game Over! Refresh page to restart.";
-  }
 }
+
+
+function calculateWin(symbol){
+
+  if(symbol === "🐵"){
+    return bet * 10;
+  }
+
+  if(symbol === "🍌"){
+    return bet * 5;
+  }
+
+  if(symbol === "🐯"){
+    return bet * 3;
+  }
+
+  if(symbol === "🦁"){
+    return bet * 2;
+  }
+
+  return bet;
+
+}
+
+
+createGrid();
 
 updateUI();
 
