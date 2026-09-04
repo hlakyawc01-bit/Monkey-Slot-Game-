@@ -1,1 +1,447 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Monkey Slot Game</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial, sans-serif;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:
+    radial-gradient(circle at top, #49351a, #17100a 65%);
+  color:white;
+}
+
+.game{
+  width:100%;
+  max-width:430px;
+  padding:15px;
+}
+
+.header{
+  text-align:center;
+  margin-bottom:15px;
+}
+
+.logo{
+  font-size:30px;
+  font-weight:bold;
+  color:#ffd54a;
+  text-shadow:
+    0 3px 0 #7a4b00,
+    0 0 15px #ffb300;
+}
+
+.subtitle{
+  margin-top:6px;
+  color:#ffe7a1;
+  font-size:13px;
+}
+
+.balance-box{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.info{
+  flex:1;
+  background:linear-gradient(#3b2b17,#21170d);
+  border:2px solid #a8751d;
+  border-radius:12px;
+  padding:10px;
+  text-align:center;
+}
+
+.info small{
+  display:block;
+  color:#d7b86c;
+  font-size:11px;
+}
+
+.info strong{
+  display:block;
+  margin-top:4px;
+  color:#fff0a5;
+  font-size:19px;
+}
+
+.slot-machine{
+  background:linear-gradient(145deg,#d39a20,#6b3d08);
+  border:5px solid #f7c849;
+  border-radius:25px;
+  padding:14px;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.6),
+    inset 0 0 20px rgba(255,230,120,.3);
+}
+
+.reels{
+  display:flex;
+  gap:8px;
+  background:#160e08;
+  padding:10px;
+  border-radius:16px;
+  border:3px solid #482708;
+}
+
+.reel{
+  flex:1;
+  height:115px;
+  background:linear-gradient(#fff7dc,#d9c58c);
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:60px;
+  color:#111;
+  border:3px solid #8e681c;
+  overflow:hidden;
+}
+
+.reel.spinning{
+  animation:shake .12s infinite;
+}
+
+@keyframes shake{
+  0%{transform:translateY(-4px)}
+  50%{transform:translateY(4px)}
+  100%{transform:translateY(-4px)}
+}
+
+.win-line{
+  margin-top:10px;
+  text-align:center;
+  background:#27170b;
+  padding:10px;
+  border-radius:10px;
+  color:#ffd85a;
+  font-weight:bold;
+  min-height:40px;
+}
+
+.controls{
+  margin-top:15px;
+  background:rgba(0,0,0,.3);
+  padding:12px;
+  border-radius:15px;
+}
+
+.bet-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.bet-label{
+  color:#ffe49a;
+  font-weight:bold;
+}
+
+.bet-control{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+button{
+  border:none;
+  cursor:pointer;
+  font-weight:bold;
+  color:white;
+  transition:.15s;
+}
+
+button:active{
+  transform:scale(.96);
+}
+
+.small-btn{
+  width:42px;
+  height:40px;
+  border-radius:10px;
+  background:linear-gradient(#75501c,#3a250c);
+  border:1px solid #c6922d;
+  font-size:22px;
+}
+
+.bet-value{
+  min-width:70px;
+  text-align:center;
+  padding:10px;
+  border-radius:10px;
+  background:#17100a;
+  border:1px solid #a8751d;
+  color:#ffd54a;
+}
+
+.spin-btn{
+  width:100%;
+  margin-top:14px;
+  padding:16px;
+  font-size:22px;
+  border-radius:14px;
+  background:linear-gradient(#ffcc38,#b56b00);
+  border:3px solid #ffe78a;
+  color:#351b00;
+  box-shadow:0 5px 0 #6c3d00;
+}
+
+.spin-btn:disabled{
+  opacity:.6;
+}
+
+.rules{
+  margin-top:15px;
+  padding:12px;
+  background:rgba(0,0,0,.3);
+  border-radius:12px;
+  color:#e8d6a0;
+  font-size:12px;
+  line-height:1.6;
+}
+
+.footer{
+  text-align:center;
+  margin-top:12px;
+  color:#9b8b69;
+  font-size:11px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="game">
+
+  <div class="header">
+    <div class="logo">🐵 MONKEY SLOT 🐵</div>
+    <div class="subtitle">DEMO GAME • FOR ENTERTAINMENT</div>
+  </div>
+
+  <div class="balance-box">
+
+    <div class="info">
+      <small>COINS</small>
+      <strong id="balance">1000</strong>
+    </div>
+
+    <div class="info">
+      <small>BET</small>
+      <strong id="topBet">10</strong>
+    </div>
+
+  </div>
+
+  <div class="slot-machine">
+
+    <div class="reels">
+      <div class="reel" id="reel1">🐵</div>
+      <div class="reel" id="reel2">🍌</div>
+      <div class="reel" id="reel3">🐯</div>
+    </div>
+
+    <div class="win-line" id="message">
+      Press SPIN to play!
+    </div>
+
+    <div class="controls">
+
+      <div class="bet-row">
+
+        <div class="bet-label">BET</div>
+
+        <div class="bet-control">
+          <button class="small-btn" onclick="changeBet(-10)">−</button>
+
+          <div class="bet-value" id="bet">10</div>
+
+          <button class="small-btn" onclick="changeBet(10)">+</button>
+        </div>
+
+      </div>
+
+      <button class="spin-btn" id="spinBtn" onclick="spin()">
+        🎰 SPIN
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="rules">
+    🐵 🐵 🐵 = 10x BET<br>
+    🍌 🍌 🍌 = 5x BET<br>
+    🐯 🐯 🐯 = 3x BET<br>
+    Any other combination = Try again!
+  </div>
+
+  <div class="footer">
+    Demo virtual coins only • No real-money betting
+  </div>
+
+</div>
+
+<script>
+
+const symbols = ["🐵","🍌","🐯","🦁","🍇","🥥"];
+
+let balance = 1000;
+let bet = 10;
+let spinning = false;
+
+function updateUI(){
+  document.getElementById("balance").innerText = balance;
+  document.getElementById("bet").innerText = bet;
+  document.getElementById("topBet").innerText = bet;
+}
+
+function changeBet(amount){
+
+  if(spinning) return;
+
+  let newBet = bet + amount;
+
+  if(newBet < 10){
+    newBet = 10;
+  }
+
+  if(newBet > 100){
+    newBet = 100;
+  }
+
+  if(newBet > balance && balance > 0){
+    newBet = balance;
+  }
+
+  bet = newBet;
+
+  updateUI();
+}
+
+function randomSymbol(){
+  return symbols[Math.floor(Math.random() * symbols.length)];
+}
+
+function spin(){
+
+  if(spinning) return;
+
+  if(balance < bet){
+    document.getElementById("message").innerText =
+      "Not enough demo coins!";
+    return;
+  }
+
+  spinning = true;
+
+  balance -= bet;
+
+  updateUI();
+
+  document.getElementById("spinBtn").disabled = true;
+
+  document.getElementById("message").innerText =
+    "Spinning...";
+
+  const reels = [
+    document.getElementById("reel1"),
+    document.getElementById("reel2"),
+    document.getElementById("reel3")
+  ];
+
+  reels.forEach(reel => {
+    reel.classList.add("spinning");
+  });
+
+  let interval = setInterval(() => {
+
+    reels.forEach(reel => {
+      reel.innerText = randomSymbol();
+    });
+
+  },100);
+
+  setTimeout(() => {
+
+    clearInterval(interval);
+
+    let result1 = randomSymbol();
+    let result2 = randomSymbol();
+    let result3 = randomSymbol();
+
+    reels[0].innerText = result1;
+    reels[1].innerText = result2;
+    reels[2].innerText = result3;
+
+    reels.forEach(reel => {
+      reel.classList.remove("spinning");
+    });
+
+    checkWin(result1,result2,result3);
+
+    spinning = false;
+
+    document.getElementById("spinBtn").disabled = false;
+
+    updateUI();
+
+  },1500);
+}
+
+function checkWin(a,b,c){
+
+  let win = 0;
+
+  if(a === "🐵" && b === "🐵" && c === "🐵"){
+    win = bet * 10;
+    document.getElementById("message").innerText =
+      "🎉 JACKPOT! You won " + win + " coins!";
+  }
+
+  else if(a === "🍌" && b === "🍌" && c === "🍌"){
+    win = bet * 5;
+    document.getElementById("message").innerText =
+      "🍌 BIG WIN! You won " + win + " coins!";
+  }
+
+  else if(a === "🐯" && b === "🐯" && c === "🐯"){
+    win = bet * 3;
+    document.getElementById("message").innerText =
+      "🔥 WIN! You won " + win + " coins!";
+  }
+
+  else{
+    document.getElementById("message").innerText =
+      "No win. Try again!";
+  }
+
+  balance += win;
+
+  if(balance <= 0){
+    document.getElementById("message").innerText =
+      "Game Over! Refresh page to restart.";
+  }
+}
+
+updateUI();
+
+</script>
+
+</body>
+</html>
