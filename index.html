@@ -7,25 +7,42 @@
 <title>Monkey Slot 5×5</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
 body{
   font-family:Arial,sans-serif;
-  background:#140d08;
+  background:
+    radial-gradient(circle at top,#573c17,#130b06 70%);
   color:#fff;
+  min-height:100vh;
 }
+
 .container{
+  width:100%;
   max-width:650px;
   margin:auto;
-  padding:15px;
+  padding:12px;
 }
+
 .card{
-  background:#2a1a0c;
-  border:2px solid #b98020;
-  border-radius:15px;
-  padding:15px;
+  background:linear-gradient(#33200e,#1b1007);
+  border:2px solid #b67a19;
+  border-radius:18px;
+  padding:14px;
+  margin-bottom:12px;
+  box-shadow:0 8px 25px rgba(0,0,0,.4);
+}
+
+h1,h2{
+  text-align:center;
+  color:#ffd24a;
   margin-bottom:12px;
 }
-h1,h2{text-align:center;color:#ffd24a}
+
 input,button{
   width:100%;
   padding:13px;
@@ -33,100 +50,249 @@ input,button{
   border-radius:10px;
   border:none;
 }
+
 input{
   background:#fff8e6;
   color:#111;
-}
-button{
-  background:#e7a719;
-  color:#281500;
-  font-weight:bold;
   font-size:16px;
 }
-button:active{transform:scale(.98)}
-.hidden{display:none!important}
+
+button{
+  background:linear-gradient(#ffcf39,#b66b00);
+  color:#2d1800;
+  font-weight:bold;
+  font-size:16px;
+  cursor:pointer;
+}
+
+button:active{
+  transform:scale(.98);
+}
+
+button:disabled{
+  opacity:.6;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.blue{
+  background:#287bd8;
+  color:#fff;
+}
+
+.green{
+  background:#2e9e52;
+  color:#fff;
+}
+
+.danger{
+  background:#b52d2d;
+  color:#fff;
+}
 
 .top{
-  display:flex;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
   gap:8px;
+  margin-bottom:10px;
 }
+
 .info{
-  flex:1;
   text-align:center;
-  background:#211308;
-  border:1px solid #a66d18;
+  background:#1d1108;
+  border:1px solid #9d6718;
   border-radius:10px;
-  padding:10px;
+  padding:8px;
 }
+
+.info small{
+  display:block;
+  color:#d9ba70;
+  font-size:11px;
+}
+
 .info strong{
   display:block;
   color:#ffd24a;
-  font-size:20px;
-  margin-top:5px;
+  font-size:18px;
+  margin-top:4px;
+  word-break:break-word;
+}
+
+.machine{
+  background:linear-gradient(145deg,#bd8016,#623707);
+  border:4px solid #f3c440;
+  border-radius:20px;
+  padding:8px;
 }
 
 .grid{
   display:grid;
   grid-template-columns:repeat(5,1fr);
-  gap:5px;
-  padding:8px;
-  background:#120a05;
-  border-radius:12px;
+  gap:4px;
+  background:#130a05;
+  padding:7px;
+  border-radius:13px;
 }
+
 .cell{
-  aspect-ratio:1;
+  aspect-ratio:1/1;
+  min-height:45px;
   display:flex;
-  justify-content:center;
   align-items:center;
-  font-size:clamp(28px,8vw,50px);
-  background:#f5df9e;
+  justify-content:center;
+  font-size:clamp(26px,8vw,48px);
+  background:linear-gradient(#fff8dc,#d9c281);
+  border:2px solid #875f15;
   border-radius:8px;
+  transition:.2s;
 }
+
 .cell.win{
-  background:#ffd12e;
+  background:#ffd32e;
+  box-shadow:0 0 12px #fff,0 0 20px #ffbd00;
+  transform:scale(1.05);
+}
+
+.cell.scatter{
+  background:#b9e7ff;
   box-shadow:0 0 12px #fff;
 }
+
 .cell.spin{
   animation:move .1s infinite;
 }
-@keyframes move{
-  50%{transform:translateY(4px)}
-}
 
-.row{
-  display:flex;
-  gap:8px;
-  align-items:center;
+@keyframes move{
+  0%{transform:translateY(-3px)}
+  50%{transform:translateY(3px)}
+  100%{transform:translateY(-3px)}
 }
-.row button{width:auto;min-width:50px}
 
 .message{
+  margin-top:10px;
+  min-height:48px;
+  padding:12px;
+  border-radius:10px;
+  background:#211308;
+  color:#ffd44d;
+  text-align:center;
+  font-weight:bold;
+  font-size:17px;
+}
+
+.bet-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:12px;
+}
+
+.bet-row button{
+  width:60px;
+  margin:0;
+  font-size:23px;
+}
+
+.bet-box{
+  flex:1;
   text-align:center;
   padding:12px;
-  color:#ffd24a;
+  border-radius:10px;
+  background:#160c06;
+  border:1px solid #b57b1c;
+  color:#ffd34a;
+  font-weight:bold;
+  font-size:18px;
+}
+
+.spin-btn{
+  margin-top:12px;
+  padding:17px;
+  font-size:23px;
+  border:3px solid #ffe68c;
 }
 
 .player{
-  background:#1e130a;
+  background:#1c1008;
+  border:1px solid #704513;
   padding:12px;
-  border-radius:10px;
-  margin-top:8px;
+  border-radius:12px;
+  margin-top:10px;
 }
-.small{
-  font-size:12px;
-  color:#d6bf8a;
-}
-.danger{background:#b52b2b;color:white}
-.green{background:#35a853;color:white}
-.blue{background:#287bd8;color:white}
 
-#history{
-  max-height:250px;
-  overflow:auto;
+.player button{
+  margin-top:6px;
 }
+
 .history-item{
-  padding:8px;
-  border-bottom:1px solid #53350f;
+  padding:10px;
+  margin-top:6px;
+  background:#211409;
+  border-radius:8px;
+  border-left:3px solid #d99a20;
+}
+
+.small{
+  color:#d6bf8a;
+  font-size:12px;
+  line-height:1.5;
+}
+
+.win-popup{
+  position:fixed;
+  inset:0;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.75);
+  z-index:1000;
+}
+
+.win-popup.show{
+  display:flex;
+}
+
+.win-box{
+  width:85%;
+  max-width:420px;
+  padding:30px 20px;
+  text-align:center;
+  border-radius:25px;
+  background:linear-gradient(#573a08,#1c1004);
+  border:4px solid #ffd43b;
+  animation:pop .3s ease;
+}
+
+@keyframes pop{
+  from{
+    transform:scale(.5);
+    opacity:0;
+  }
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+.win-title{
+  font-size:32px;
+  font-weight:bold;
+  color:#ffe14a;
+}
+
+.win-amount{
+  font-size:42px;
+  margin:15px 0;
+  color:#fff;
+}
+
+.admin-title{
+  color:#ffd24a;
+  text-align:center;
+  margin-bottom:10px;
 }
 </style>
 </head>
@@ -135,263 +301,472 @@ button:active{transform:scale(.98)}
 
 <div class="container">
 
-<!-- LOGIN -->
+<!-- ================= LOGIN ================= -->
+
 <div id="loginPage">
 
-<div class="card">
-<h1>🐵 MONKEY SLOT 🐵</h1>
+  <div class="card">
 
-<input id="phone" placeholder="Phone Number">
-<input id="password" type="password" placeholder="Password">
+    <h1>🐵 MONKEY SLOT 🐵</h1>
 
-<button onclick="login()">LOGIN</button>
+    <input
+      id="phone"
+      placeholder="Phone Number"
+    >
 
-<button class="blue" onclick="showRegister()">
-CREATE PLAYER ACCOUNT
-</button>
+    <input
+      id="password"
+      type="password"
+      placeholder="Password"
+    >
 
-<button class="danger" onclick="adminLogin()">
-ADMIN LOGIN
-</button>
+    <button onclick="login()">
+      LOGIN
+    </button>
 
-<p class="small" style="text-align:center;margin-top:10px">
-Demo account system
-</p>
+    <button
+      class="blue"
+      onclick="showRegister()"
+    >
+      CREATE ACCOUNT
+    </button>
+
+    <button
+      class="danger"
+      onclick="adminLogin()"
+    >
+      👑 ADMIN LOGIN
+    </button>
+
+    <p
+      class="small"
+      style="text-align:center;margin-top:12px"
+    >
+      Demo virtual coin game
+    </p>
+
+  </div>
+
+</div>
+
+
+<!-- ================= REGISTER ================= -->
+
+<div
+  id="registerPage"
+  class="hidden"
+>
+
+  <div class="card">
+
+    <h2>👤 CREATE ACCOUNT</h2>
+
+    <input
+      id="regName"
+      placeholder="Player Name"
+    >
+
+    <input
+      id="regPhone"
+      placeholder="Phone Number"
+    >
+
+    <input
+      id="regPassword"
+      type="password"
+      placeholder="Password"
+    >
+
+    <button
+      class="green"
+      onclick="registerPlayer()"
+    >
+      CREATE ACCOUNT
+    </button>
+
+    <button
+      class="blue"
+      onclick="backLogin()"
+    >
+      BACK TO LOGIN
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ================= GAME ================= -->
+
+<div
+  id="gamePage"
+  class="hidden"
+>
+
+  <div class="card">
+
+    <h1>🐵 MONKEY SLOT 5×5 🐵</h1>
+
+    <div class="top">
+
+      <div class="info">
+        <small>PLAYER</small>
+        <strong id="playerName"></strong>
+      </div>
+
+      <div class="info">
+        <small>COINS</small>
+        <strong id="balance">0</strong>
+      </div>
+
+      <div class="info">
+        <small>SPINS</small>
+        <strong id="spins">0</strong>
+      </div>
+
+      <div class="info">
+        <small>FREE SPINS</small>
+        <strong id="freeSpins">0</strong>
+      </div>
+
+    </div>
+
+
+    <div class="machine">
+
+      <div
+        class="grid"
+        id="grid"
+      ></div>
+
+      <div
+        class="message"
+        id="message"
+      >
+        🎰 Press SPIN
+      </div>
+
+      <div class="bet-row">
+
+        <button
+          onclick="changeBet(-10)"
+        >
+          −
+        </button>
+
+        <div class="bet-box">
+
+          BET:
+          <span id="bet">10</span>
+
+        </div>
+
+        <button
+          onclick="changeBet(10)"
+        >
+          +
+        </button>
+
+      </div>
+
+      <button
+        id="spinBtn"
+        class="spin-btn"
+        onclick="spin()"
+      >
+        🎰 SPIN
+      </button>
+
+    </div>
+
+
+    <button
+      class="blue"
+      onclick="showHistory()"
+    >
+      📜 MY HISTORY
+    </button>
+
+    <button
+      class="danger"
+      onclick="logout()"
+    >
+      LOGOUT
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ================= HISTORY ================= -->
+
+<div
+  id="historyPage"
+  class="hidden"
+>
+
+  <div class="card">
+
+    <h2>📜 MY HISTORY</h2>
+
+    <div id="history"></div>
+
+    <button
+      class="blue"
+      onclick="backGame()"
+    >
+      BACK TO GAME
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- ================= ADMIN ================= -->
+
+<div
+  id="adminPage"
+  class="hidden"
+>
+
+  <div class="card">
+
+    <h1>👑 GAME ADMIN</h1>
+
+    <div id="adminPlayers"></div>
+
+    <button
+      class="blue"
+      onclick="logout()"
+    >
+      LOGOUT ADMIN
+    </button>
+
+  </div>
+
 </div>
 
 </div>
 
 
-<!-- REGISTER -->
-<div id="registerPage" class="hidden">
+<!-- ================= WIN POPUP ================= -->
 
-<div class="card">
+<div
+  id="winPopup"
+  class="win-popup"
+>
 
-<h2>CREATE ACCOUNT</h2>
+  <div class="win-box">
 
-<input id="regName" placeholder="Player Name">
-<input id="regPhone" placeholder="Phone Number">
-<input id="regPassword" type="password" placeholder="Password">
+    <div
+      id="winTitle"
+      class="win-title"
+    >
+      WIN!
+    </div>
 
-<button onclick="registerPlayer()">
-CREATE ACCOUNT
-</button>
+    <div
+      id="winAmount"
+      class="win-amount"
+    >
+      0
+    </div>
 
-<button class="blue" onclick="backLogin()">
-BACK
-</button>
+    <button onclick="closeWinPopup()">
+      CONTINUE
+    </button>
 
-</div>
-
-</div>
-
-
-<!-- GAME -->
-<div id="gamePage" class="hidden">
-
-<div class="card">
-
-<h1>🐵 MONKEY SLOT 5×5</h1>
-
-<div class="top">
-
-<div class="info">
-<small>PLAYER</small>
-<strong id="playerName"></strong>
-</div>
-
-<div class="info">
-<small>COINS</small>
-<strong id="balance">1000</strong>
-</div>
-
-<div class="info">
-<small>SPINS</small>
-<strong id="spins">0</strong>
-</div>
-
-</div>
-
-<br>
-
-<div class="grid" id="grid"></div>
-
-<div class="message" id="message">
-Press SPIN
-</div>
-
-<div class="row">
-
-<button onclick="changeBet(-10)">−</button>
-
-<div class="info">
-BET
-<strong id="bet">10</strong>
-</div>
-
-<button onclick="changeBet(10)">+</button>
-
-</div>
-
-<button id="spinBtn" onclick="spin()">
-🎰 SPIN
-</button>
-
-<button class="blue" onclick="showHistory()">
-📜 MY HISTORY
-</button>
-
-<button class="danger" onclick="logout()">
-LOGOUT
-</button>
-
-</div>
-
-</div>
-
-
-<!-- HISTORY -->
-<div id="historyPage" class="hidden">
-
-<div class="card">
-
-<h2>MY GAME HISTORY</h2>
-
-<div id="history"></div>
-
-<button onclick="backGame()">
-BACK TO GAME
-</button>
-
-</div>
-
-</div>
-
-
-<!-- ADMIN -->
-<div id="adminPage" class="hidden">
-
-<div class="card">
-
-<h1>👑 GAME ADMIN</h1>
-
-<div id="adminPlayers"></div>
-
-<button class="blue" onclick="logout()">
-LOGOUT ADMIN
-</button>
-
-</div>
-
-</div>
+  </div>
 
 </div>
 
 
 <script>
 
-/* =========================
+/* =========================================
    CONFIG
-========================= */
+========================================= */
 
 const ADMIN_PHONE = "admin";
 const ADMIN_PASSWORD = "123456";
 
-const symbols = ["🐵","🍌","🐯","🦁","🍇","🥥"];
+const symbols = [
+  "🐵",
+  "🍌",
+  "🐯",
+  "🦁",
+  "🍇",
+  "🥥",
+  "🎁"
+];
+
+const SCATTER = "🎁";
 
 let currentUser = null;
+
 let bet = 10;
+
 let spinning = false;
+
+let freeSpins = 0;
+
 let cells = [];
 
 
-/* =========================
+/* =========================================
    DATABASE
-========================= */
+========================================= */
 
 function getPlayers(){
+
   return JSON.parse(
-    localStorage.getItem("monkeyPlayers") || "[]"
+    localStorage.getItem(
+      "monkeyPlayers"
+    ) || "[]"
   );
+
 }
 
+
 function savePlayers(players){
+
   localStorage.setItem(
     "monkeyPlayers",
     JSON.stringify(players)
   );
+
 }
 
 
-/* =========================
+/* =========================================
    PAGE CONTROL
-========================= */
+========================================= */
 
 function hideAll(){
 
-  document.getElementById("loginPage").classList.add("hidden");
-  document.getElementById("registerPage").classList.add("hidden");
-  document.getElementById("gamePage").classList.add("hidden");
-  document.getElementById("historyPage").classList.add("hidden");
-  document.getElementById("adminPage").classList.add("hidden");
+  document
+    .getElementById("loginPage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("registerPage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("gamePage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("historyPage")
+    .classList.add("hidden");
+
+  document
+    .getElementById("adminPage")
+    .classList.add("hidden");
 
 }
+
 
 function showRegister(){
+
   hideAll();
-  document.getElementById("registerPage")
+
+  document
+    .getElementById("registerPage")
     .classList.remove("hidden");
+
 }
+
 
 function backLogin(){
+
   hideAll();
-  document.getElementById("loginPage")
+
+  document
+    .getElementById("loginPage")
     .classList.remove("hidden");
+
 }
+
 
 function logout(){
+
   currentUser = null;
+
+  freeSpins = 0;
+
   hideAll();
 
-  document.getElementById("loginPage")
+  document
+    .getElementById("loginPage")
     .classList.remove("hidden");
+
 }
 
 
-/* =========================
+/* =========================================
    REGISTER
-========================= */
+========================================= */
 
 function registerPlayer(){
 
   const name =
-    document.getElementById("regName").value.trim();
+    document
+      .getElementById("regName")
+      .value
+      .trim();
 
   const phone =
-    document.getElementById("regPhone").value.trim();
+    document
+      .getElementById("regPhone")
+      .value
+      .trim();
 
   const password =
-    document.getElementById("regPassword").value;
+    document
+      .getElementById("regPassword")
+      .value;
 
-  if(!name || !phone || !password){
 
-    alert("Please fill all fields");
+  if(
+    !name ||
+    !phone ||
+    !password
+  ){
+
+    alert(
+      "Please fill all fields"
+    );
 
     return;
+
   }
 
-  let players = getPlayers();
 
-  if(players.some(p => p.phone === phone)){
+  let players =
+    getPlayers();
 
-    alert("Phone number already registered");
+
+  if(
+    players.some(
+      p => p.phone === phone
+    )
+  ){
+
+    alert(
+      "Phone already registered"
+    );
 
     return;
+
   }
+
 
   const player = {
 
-    id: Date.now(),
+    id:Date.now(),
 
     name:name,
 
@@ -409,70 +784,98 @@ function registerPlayer(){
 
   };
 
+
   players.push(player);
 
   savePlayers(players);
 
-  alert("Account created!");
+  alert(
+    "Account created successfully!"
+  );
 
   backLogin();
 
 }
 
 
-/* =========================
-   LOGIN
-========================= */
+/* =========================================
+   PLAYER LOGIN
+========================================= */
 
 function login(){
 
   const phone =
-    document.getElementById("phone").value.trim();
+    document
+      .getElementById("phone")
+      .value
+      .trim();
 
   const password =
-    document.getElementById("password").value;
+    document
+      .getElementById("password")
+      .value;
 
-  let players = getPlayers();
+
+  let players =
+    getPlayers();
+
 
   const player =
     players.find(
       p =>
-      p.phone === phone &&
-      p.password === password
+        p.phone === phone &&
+        p.password === password
     );
+
 
   if(!player){
 
-    alert("Wrong phone or password");
+    alert(
+      "Wrong phone or password"
+    );
 
     return;
+
   }
+
 
   if(player.blocked){
 
-    alert("Your account has been blocked");
+    alert(
+      "Your account is blocked"
+    );
 
     return;
+
   }
 
+
   currentUser = player;
+
+  freeSpins = 0;
 
   startGame();
 
 }
 
 
-/* =========================
+/* =========================================
    ADMIN LOGIN
-========================= */
+========================================= */
 
 function adminLogin(){
 
   const phone =
-    document.getElementById("phone").value.trim();
+    document
+      .getElementById("phone")
+      .value
+      .trim();
 
   const password =
-    document.getElementById("password").value;
+    document
+      .getElementById("password")
+      .value;
+
 
   if(
     phone === ADMIN_PHONE &&
@@ -481,7 +884,8 @@ function adminLogin(){
 
     hideAll();
 
-    document.getElementById("adminPage")
+    document
+      .getElementById("adminPage")
       .classList.remove("hidden");
 
     loadAdminPlayers();
@@ -490,26 +894,33 @@ function adminLogin(){
 
   else{
 
-    alert("Wrong admin login");
+    alert(
+      "Wrong admin login"
+    );
 
   }
 
 }
 
 
-/* =========================
-   GAME
-========================= */
+/* =========================================
+   GAME START
+========================================= */
 
 function startGame(){
 
   hideAll();
 
-  document.getElementById("gamePage")
+  document
+    .getElementById("gamePage")
     .classList.remove("hidden");
 
-  document.getElementById("playerName")
-    .innerText = currentUser.name;
+
+  document
+    .getElementById("playerName")
+    .innerText =
+      currentUser.name;
+
 
   createGrid();
 
@@ -517,23 +928,37 @@ function startGame(){
 
 }
 
+
 function createGrid(){
 
   const grid =
-    document.getElementById("grid");
+    document
+      .getElementById("grid");
+
 
   grid.innerHTML = "";
 
   cells = [];
 
-  for(let i=0;i<25;i++){
+
+  for(
+    let i = 0;
+    i < 25;
+    i++
+  ){
 
     const cell =
-      document.createElement("div");
+      document
+        .createElement("div");
 
-    cell.className = "cell";
 
-    cell.innerText = randomSymbol();
+    cell.className =
+      "cell";
+
+
+    cell.innerText =
+      randomSymbol();
+
 
     grid.appendChild(cell);
 
@@ -543,135 +968,352 @@ function createGrid(){
 
 }
 
+
 function randomSymbol(){
 
   return symbols[
-    Math.floor(Math.random()*symbols.length)
+    Math.floor(
+      Math.random() *
+      symbols.length
+    )
   ];
 
 }
 
+
 function updateGame(){
 
-  document.getElementById("balance")
-    .innerText = currentUser.balance;
+  document
+    .getElementById("balance")
+    .innerText =
+      currentUser.balance;
 
-  document.getElementById("spins")
-    .innerText = currentUser.spins;
 
-  document.getElementById("bet")
-    .innerText = bet;
+  document
+    .getElementById("spins")
+    .innerText =
+      currentUser.spins;
+
+
+  document
+    .getElementById("bet")
+    .innerText =
+      bet;
+
+
+  document
+    .getElementById("freeSpins")
+    .innerText =
+      freeSpins;
 
 }
+
+
+/* =========================================
+   BET
+========================================= */
 
 function changeBet(amount){
 
-  let newBet = bet + amount;
+  if(spinning) return;
 
-  if(newBet < 10) newBet = 10;
 
-  if(newBet > 100) newBet = 100;
+  let newBet =
+    bet + amount;
 
-  if(newBet <= currentUser.balance){
 
-    bet = newBet;
+  if(newBet < 10){
 
-    updateGame();
+    newBet = 10;
 
   }
+
+
+  if(newBet > 30000){
+
+    newBet = 30000;
+
+  }
+
+
+  if(
+    newBet >
+    currentUser.balance
+  ){
+
+    if(currentUser.balance >= 10){
+
+      newBet =
+        currentUser.balance;
+
+    }
+
+  }
+
+
+  bet = newBet;
+
+  updateGame();
 
 }
 
 
-/* =========================
+/* =========================================
    SPIN
-========================= */
+========================================= */
 
 function spin(){
 
   if(spinning) return;
 
-  if(currentUser.balance < bet){
 
-    alert("Not enough coins");
+  let isFreeSpin =
+    freeSpins > 0;
+
+
+  if(
+    !isFreeSpin &&
+    currentUser.balance < bet
+  ){
+
+    alert(
+      "Not enough coins"
+    );
 
     return;
+
   }
+
 
   spinning = true;
 
-  currentUser.balance -= bet;
+
+  document
+    .getElementById("spinBtn")
+    .disabled = true;
+
+
+  if(isFreeSpin){
+
+    freeSpins--;
+
+    document
+      .getElementById("message")
+      .innerText =
+        "🎁 FREE SPIN!";
+
+  }
+
+  else{
+
+    currentUser.balance -= bet;
+
+    document
+      .getElementById("message")
+      .innerText =
+        "🎰 SPINNING...";
+
+  }
+
 
   currentUser.spins++;
 
+
   cells.forEach(c => {
 
-    c.classList.remove("win");
+    c.classList.remove(
+      "win"
+    );
 
-    c.classList.add("spin");
+    c.classList.remove(
+      "scatter"
+    );
+
+    c.classList.add(
+      "spin"
+    );
 
   });
 
-  const interval =
-    setInterval(()=>{
 
-      cells.forEach(c=>{
-        c.innerText=randomSymbol();
+  const interval =
+    setInterval(() => {
+
+      cells.forEach(c => {
+
+        c.innerText =
+          randomSymbol();
+
       });
 
     },100);
 
 
-  setTimeout(()=>{
+  setTimeout(() => {
 
     clearInterval(interval);
 
-    cells.forEach(c=>{
 
-      c.innerText=randomSymbol();
+    cells.forEach(c => {
 
-      c.classList.remove("spin");
+      c.innerText =
+        randomSymbol();
+
+      c.classList.remove(
+        "spin"
+      );
 
     });
 
-    let win = checkWins();
 
-    currentUser.balance += win;
+    /* Scatter */
+
+    let scatterResult =
+      checkScatter();
+
+
+    /* Normal Win */
+
+    let win =
+      checkWins();
+
+
+    currentUser.balance +=
+      win;
+
 
     currentUser.history.push({
 
-      time:new Date().toLocaleString(),
+      time:
+        new Date()
+        .toLocaleString(),
 
-      bet:bet,
+      bet:
+        isFreeSpin
+        ? 0
+        : bet,
 
-      win:win
+      win:win,
+
+      freeSpin:
+        isFreeSpin,
+
+      scatters:
+        scatterResult
 
     });
 
+
     saveCurrentUser();
+
 
     updateGame();
 
-    spinning=false;
+
+    spinning = false;
+
+
+    document
+      .getElementById("spinBtn")
+      .disabled = false;
+
+
+    if(win > 0){
+
+      showWinPopup(win);
+
+    }
 
   },1500);
 
 }
 
 
-/* =========================
+/* =========================================
+   SCATTER
+========================================= */
+
+function checkScatter(){
+
+  let scatterCount = 0;
+
+
+  cells.forEach(cell => {
+
+    if(
+      cell.innerText ===
+      SCATTER
+    ){
+
+      scatterCount++;
+
+      cell.classList.add(
+        "scatter"
+      );
+
+    }
+
+  });
+
+
+  if(scatterCount >= 5){
+
+    freeSpins += 12;
+
+    document
+      .getElementById("message")
+      .innerText =
+        "🎁 5 SCATTERS! +12 FREE SPINS!";
+
+  }
+
+  else if(scatterCount === 4){
+
+    freeSpins += 8;
+
+    document
+      .getElementById("message")
+      .innerText =
+        "🎁 4 SCATTERS! +8 FREE SPINS!";
+
+  }
+
+  else if(scatterCount === 3){
+
+    freeSpins += 5;
+
+    document
+      .getElementById("message")
+      .innerText =
+        "🎁 3 SCATTERS! +5 FREE SPINS!";
+
+  }
+
+
+  return scatterCount;
+
+}
+
+
+/* =========================================
    WIN CHECK
-========================= */
+   Horizontal rows
+========================================= */
 
 function checkWins(){
 
   let totalWin = 0;
 
-  /* 5 horizontal rows */
 
-  for(let row=0;row<5;row++){
+  for(
+    let row = 0;
+    row < 5;
+    row++
+  ){
 
-    let start = row*5;
+    let start =
+      row * 5;
+
 
     let best = 1;
 
@@ -682,11 +1324,29 @@ function checkWins(){
     let currentStart = 0;
 
 
-    for(let col=1;col<5;col++){
+    for(
+      let col = 1;
+      col < 5;
+      col++
+    ){
+
+      const current =
+        cells[
+          start + col
+        ].innerText;
+
+
+      const previous =
+        cells[
+          start + col - 1
+        ].innerText;
+
+
+      /* Scatter does not count */
 
       if(
-        cells[start+col].innerText ===
-        cells[start+col-1].innerText
+        current === previous &&
+        current !== SCATTER
       ){
 
         count++;
@@ -695,18 +1355,19 @@ function checkWins(){
 
       else{
 
-        count=1;
+        count = 1;
 
-        currentStart=col;
+        currentStart = col;
 
       }
 
 
-      if(count>best){
+      if(count > best){
 
-        best=count;
+        best = count;
 
-        bestStart=currentStart;
+        bestStart =
+          currentStart;
 
       }
 
@@ -715,27 +1376,57 @@ function checkWins(){
 
     let multiplier = 0;
 
-    if(best===3) multiplier=1;
-    if(best===4) multiplier=1.5;
-    if(best>=5) multiplier=2;
+
+    /* 3 = 100% */
+
+    if(best === 3){
+
+      multiplier = 1;
+
+    }
 
 
-    if(multiplier>0){
+    /* 4 = 150% */
+
+    else if(best === 4){
+
+      multiplier = 1.5;
+
+    }
+
+
+    /* 5 = 200% */
+
+    else if(best >= 5){
+
+      multiplier = 2;
+
+    }
+
+
+    if(multiplier > 0){
 
       let win =
-        Math.floor(bet*multiplier);
+        Math.floor(
+          bet *
+          multiplier
+        );
+
 
       totalWin += win;
 
 
       for(
-        let i=bestStart;
-        i<bestStart+best;
+        let i = bestStart;
+        i < bestStart + best;
         i++
       ){
 
-        cells[start+i]
-          .classList.add("win");
+        cells[
+          start + i
+        ].classList.add(
+          "win"
+        );
 
       }
 
@@ -744,45 +1435,110 @@ function checkWins(){
   }
 
 
-  if(totalWin>0){
-
-    document.getElementById("message")
-      .innerText =
-      "🎉 WIN! +" +
-      totalWin +
-      " COINS";
-
-  }
-
-  else{
-
-    document.getElementById("message")
-      .innerText =
-      "No Win";
-
-  }
-
   return totalWin;
 
 }
 
 
-/* =========================
-   SAVE PLAYER
-========================= */
+/* =========================================
+   WIN POPUP
+========================================= */
+
+function showWinPopup(win){
+
+  const title =
+    document
+      .getElementById("winTitle");
+
+
+  const amount =
+    document
+      .getElementById("winAmount");
+
+
+  /*
+    WIN LEVEL
+  */
+
+
+  if(
+    win >= bet * 20
+  ){
+
+    title.innerText =
+      "⚡⚡ SPIN WIN ⚡⚡";
+
+  }
+
+  else if(
+    win >= bet * 10
+  ){
+
+    title.innerText =
+      "🔥 SUPER WIN 🔥";
+
+  }
+
+  else if(
+    win >= bet * 5
+  ){
+
+    title.innerText =
+      "🎉 BIG WIN 🎉";
+
+  }
+
+  else{
+
+    title.innerText =
+      "🎊 WIN! 🎊";
+
+  }
+
+
+  amount.innerText =
+    "+" + win +
+    " COINS";
+
+
+  document
+    .getElementById("winPopup")
+    .classList.add("show");
+
+}
+
+
+function closeWinPopup(){
+
+  document
+    .getElementById("winPopup")
+    .classList.remove("show");
+
+}
+
+
+/* =========================================
+   SAVE USER
+========================================= */
 
 function saveCurrentUser(){
 
-  let players = getPlayers();
+  let players =
+    getPlayers();
+
 
   let index =
     players.findIndex(
-      p => p.id === currentUser.id
+      p =>
+        p.id ===
+        currentUser.id
     );
+
 
   if(index !== -1){
 
-    players[index] = currentUser;
+    players[index] =
+      currentUser;
 
     savePlayers(players);
 
@@ -791,38 +1547,78 @@ function saveCurrentUser(){
 }
 
 
-/* =========================
+/* =========================================
    HISTORY
-========================= */
+========================================= */
 
 function showHistory(){
 
   hideAll();
 
-  document.getElementById("historyPage")
+
+  document
+    .getElementById("historyPage")
     .classList.remove("hidden");
 
-  const box =
-    document.getElementById("history");
 
-  box.innerHTML="";
+  const box =
+    document
+      .getElementById("history");
+
+
+  box.innerHTML = "";
+
+
+  if(
+    !currentUser.history ||
+    currentUser.history.length === 0
+  ){
+
+    box.innerHTML =
+      "<p class='small'>" +
+      "No game history yet." +
+      "</p>";
+
+    return;
+
+  }
 
 
   currentUser.history
     .slice()
     .reverse()
-    .forEach(h=>{
+    .forEach(h => {
+
 
       const item =
-        document.createElement("div");
+        document
+          .createElement("div");
+
 
       item.className =
         "history-item";
 
+
       item.innerHTML =
-        "🎰 " + h.time +
-        "<br>BET: " + h.bet +
-        " | WIN: " + h.win;
+
+        "🎰 " +
+        h.time +
+
+        "<br>💰 BET: " +
+        h.bet +
+
+        "<br>🏆 WIN: " +
+        h.win +
+
+        "<br>🎁 SCATTERS: " +
+        h.scatters +
+
+        (
+          h.freeSpin
+          ? "<br>🎁 FREE SPIN"
+          : ""
+        );
+
 
       box.appendChild(item);
 
@@ -830,91 +1626,127 @@ function showHistory(){
 
 }
 
+
 function backGame(){
 
   hideAll();
 
-  document.getElementById("gamePage")
+
+  document
+    .getElementById("gamePage")
     .classList.remove("hidden");
+
+
+  updateGame();
 
 }
 
 
-/* =========================
+/* =========================================
    ADMIN
-========================= */
+========================================= */
 
 function loadAdminPlayers(){
 
-  const players = getPlayers();
+  const players =
+    getPlayers();
+
 
   const box =
-    document.getElementById("adminPlayers");
+    document
+      .getElementById(
+        "adminPlayers"
+      );
 
-  box.innerHTML="";
+
+  box.innerHTML = "";
 
 
-  if(players.length===0){
+  if(players.length === 0){
 
     box.innerHTML =
-      "<p>No players yet.</p>";
+      "<p class='small'>" +
+      "No players yet." +
+      "</p>";
 
     return;
+
   }
 
 
-  players.forEach(player=>{
+  players.forEach(player => {
+
 
     const div =
-      document.createElement("div");
+      document
+        .createElement("div");
 
-    div.className="player";
+
+    div.className =
+      "player";
 
 
     div.innerHTML =
 
       "<b>👤 " +
-      player.name +
-      "</b><br>" +
+      escapeHTML(
+        player.name
+      ) +
+      "</b>" +
 
-      "📱 " +
-      player.phone +
-      "<br>" +
+      "<br>📱 " +
+      escapeHTML(
+        player.phone
+      ) +
 
-      "💰 Coins: " +
+      "<br>💰 Coins: " +
       player.balance +
-      "<br>" +
 
-      "🎰 Spins: " +
+      "<br>🎰 Spins: " +
       player.spins +
-      "<br>" +
 
-      "Status: " +
+      "<br>Status: " +
+
       (
         player.blocked
         ? "🚫 BLOCKED"
         : "✅ ACTIVE"
       ) +
 
-      "<div class='row'>" +
 
-      "<button onclick='addCoins("+
-      player.id+
-      ")'>➕</button>" +
+      "<button class='green' onclick='addCoins(" +
+      player.id +
+      ")'>" +
+      "➕ ADD COINS" +
+      "</button>" +
 
-      "<button onclick='removeCoins("+
-      player.id+
-      ")'>➖</button>" +
 
-      "<button class='danger' onclick='toggleBlock("+
-      player.id+
-      ")'>BLOCK/UNBLOCK</button>" +
+      "<button class='danger' onclick='removeCoins(" +
+      player.id +
+      ")'>" +
+      "➖ REMOVE COINS" +
+      "</button>" +
 
-      "</div>" +
 
-      "<button class='blue' onclick='viewPlayerHistory("+
-      player.id+
-      ")'>📜 VIEW HISTORY</button>";
+      "<button class='blue' onclick='toggleBlock(" +
+      player.id +
+      ")'>" +
+
+      (
+        player.blocked
+        ? "✅ UNBLOCK"
+        : "🚫 BLOCK"
+      ) +
+
+      "</button>" +
+
+
+      "<button onclick='viewPlayerHistory(" +
+      player.id +
+      ")'>" +
+      "📜 VIEW HISTORY" +
+      "</button>";
+
 
     box.appendChild(div);
 
@@ -923,100 +1755,213 @@ function loadAdminPlayers(){
 }
 
 
+/* =========================================
+   ADMIN COINS
+========================================= */
+
 function addCoins(id){
 
   let amount =
-    Number(prompt("Coins to add:"));
+    Number(
+      prompt(
+        "Coins to add:"
+      )
+    );
 
-  if(!amount || amount<=0) return;
 
-  updatePlayerCoins(id,amount);
+  if(
+    !amount ||
+    amount <= 0
+  ) return;
+
+
+  updatePlayerCoins(
+    id,
+    amount
+  );
 
 }
+
 
 function removeCoins(id){
 
   let amount =
-    Number(prompt("Coins to remove:"));
+    Number(
+      prompt(
+        "Coins to remove:"
+      )
+    );
 
-  if(!amount || amount<=0) return;
 
-  updatePlayerCoins(id,-amount);
+  if(
+    !amount ||
+    amount <= 0
+  ) return;
+
+
+  updatePlayerCoins(
+    id,
+    -amount
+  );
 
 }
 
 
-function updatePlayerCoins(id,amount){
+function updatePlayerCoins(
+  id,
+  amount
+){
 
-  let players = getPlayers();
+  let players =
+    getPlayers();
+
 
   let player =
-    players.find(p=>p.id===id);
+    players.find(
+      p =>
+        p.id === id
+    );
+
 
   if(!player) return;
 
-  player.balance += amount;
 
-  if(player.balance<0)
-    player.balance=0;
+  player.balance +=
+    amount;
+
+
+  if(
+    player.balance < 0
+  ){
+
+    player.balance = 0;
+
+  }
+
 
   savePlayers(players);
+
 
   loadAdminPlayers();
 
 }
 
 
+/* =========================================
+   ADMIN BLOCK
+========================================= */
+
 function toggleBlock(id){
 
-  let players=getPlayers();
+  let players =
+    getPlayers();
 
-  let player=
-    players.find(p=>p.id===id);
+
+  let player =
+    players.find(
+      p =>
+        p.id === id
+    );
+
+
+  if(!player) return;
+
 
   player.blocked =
     !player.blocked;
 
+
   savePlayers(players);
+
 
   loadAdminPlayers();
 
 }
 
 
+/* =========================================
+   ADMIN HISTORY
+========================================= */
+
 function viewPlayerHistory(id){
 
-  let players=getPlayers();
+  let players =
+    getPlayers();
 
-  let player=
-    players.find(p=>p.id===id);
+
+  let player =
+    players.find(
+      p =>
+        p.id === id
+    );
+
 
   if(!player) return;
 
 
+  if(
+    !player.history ||
+    player.history.length === 0
+  ){
+
+    alert(
+      "No history yet."
+    );
+
+    return;
+
+  }
+
+
   let text =
+
     "PLAYER: " +
     player.name +
+
     "\n\n";
 
 
   player.history
     .slice()
     .reverse()
-    .forEach(h=>{
+    .forEach(h => {
+
 
       text +=
+
         h.time +
+
         "\nBET: " +
         h.bet +
-        " WIN: " +
+
+        " | WIN: " +
         h.win +
+
+        "\nSCATTERS: " +
+        h.scatters +
+
         "\n\n";
 
     });
 
 
-  alert(text || "No history");
+  alert(text);
+
+}
+
+
+/* =========================================
+   SECURITY HELPER
+========================================= */
+
+function escapeHTML(text){
+
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
